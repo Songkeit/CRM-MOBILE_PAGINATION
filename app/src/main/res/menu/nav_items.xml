@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:checkable="true"
+        android:icon="@drawable/baseline_home_24"
+        android:title="บันทึกข้อมูล" />
+    <item
+        android:id="@+id/nav_UnSave"
+        android:checkable="true"
+        android:icon="@drawable/baseline_person_24"
+        android:title="ข้อมูลการรับเรื่อง" />
+
+    <item
+        android:id="@+id/nav_normal"
+        android:checkable="true"
+        android:icon="@drawable/baseline_width_normal_24"
+        android:title="ค้นหาข้อมูล"
+        />
+    <item
+        android:id="@+id/nav_emergency"
+        android:checkable="true"
+        android:icon="@drawable/baseline_width_normal_24"
+        android:title="ค้นหาการรับเรื่องฉุกเฉินจริง" />
+    <item
+        android:id="@+id/nav_concution_supervisor"
+        android:checkable="true"
+        android:icon="@drawable/baseline_width_normal_24"
+        android:title="สรุปงาน SUPERVISOR"
+        />
+    <item
+        android:id="@+id/nav_search_concution_supervisor"
+        android:checkable="true"
+        android:icon="@drawable/baseline_width_normal_24"
+        android:title="ค้นหาสรุปงาน SUPERVISOR" />
+    <item
+        android:id="@+id/nav_problem"
+        android:checkable="true"
+        android:icon="@drawable/baseline_width_normal_24"
+        android:title="ปัญหาทางเทคนิค"
+        />
+    <item
+        android:id="@+id/nav_manage_kiosk"
+        android:checkable="true"
+        android:icon="@drawable/baseline_width_normal_24"
+        android:title="จัดการตู้ KIOSK" />
+
+    <item
+        android:id="@+id/nav_log_out"
+        android:checkable="true"
+        android:icon="@drawable/baseline_width_normal_24"
+        android:title="Logout" />
+</menu>
+

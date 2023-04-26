@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_frag"
+    app:startDestination="@id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_emergency"
+        android:name="com.ezatpanah.hilt_retrofit_paging_youtube.ui.Hilt_EmergencyFragment"
+        android:label="Emergency"
+        tools:layout="@layout/fragment_emergency" >
+        <action
+            android:id="@+id/action_nav_emergency_to_nav_home"
+            app:popUpTo="@layout/fragment_emergency_detailes"
+            app:destination="@id/nav_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.ezatpanah.hilt_retrofit_paging_youtube.ui.Hilt_HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/activity_detail" >
+        <action
+            android:id="@+id/action_nav_home_self"
+            app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_emergency"
+            app:destination="@id/nav_emergency" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_normal"
+            app:destination="@id/nav_normal" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_UnSave"
+            app:destination="@id/nav_UnSave" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_normal"
+        android:name="com.ezatpanah.hilt_retrofit_paging_youtube.ui.Hilt_NormalDetailFragment"
+        android:label="Normal"
+        tools:layout="@layout/activity_normal" >
+        <action
+            android:id="@+id/action_nav_normal_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_UnSave"
+        android:name="com.ezatpanah.hilt_retrofit_paging_youtube.ui.UnsavedFragment"
+        android:label="UnSave"
+        tools:layout="@layout/activity_unsave" >
+        <action
+            android:id="@+id/action_nav_UnSave_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+</navigation>

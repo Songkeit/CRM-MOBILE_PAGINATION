@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.ezatpanah.hilt_retrofit_paging_youtube.ui.HomeFragment"
+        android:label="บันทึกข้อมูล"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/unsavedFragment"
+        android:name="com.ezatpanah.hilt_retrofit_paging_youtube.ui.UnsavedFragment"
+        android:label="บันทึกการรับเรื่อง"
+        tools:layout="@layout/fragment_unsaved" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/normalFragment"
+        android:name="com.ezatpanah.hilt_retrofit_paging_youtube.ui.NormalFragment"
+        android:label="ค้นหาข้อมูล"
+        tools:layout="@layout/fragment_normal" >
+        <action
+            android:id="@+id/action_normalFragment_to_normalDetailFragment"
+            app:destination="@id/normalDetailFragment" />
+    </fragment>
+
+
+
+    <fragment
+        android:id="@+id/emergencyFragment"
+        android:name="com.ezatpanah.hilt_retrofit_paging_youtube.ui.EmergencyFragment"
+        android:label="รับเรื่องฉุกเฉิน"
+        tools:layout="@layout/fragment_emergency" >
+
+        <action
+            android:id="@+id/action_emergencyFragment_to_emergencyDetailsFragment"
+            app:destination="@id/emergencyDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/emergencyDetailsFragment"
+        android:name="com.ezatpanah.hilt_retrofit_paging_youtube.ui.EmergencyDetailsFragment"
+        android:label="บันทึกข้อมูล"
+        tools:layout="@layout/fragment_emergency" >
+        <argument
+            android:name="emergencyId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/normalDetailFragment"
+        android:name="com.ezatpanah.hilt_retrofit_paging_youtube.ui.NormalDetailFragment"
+        android:label="บันทึกข้อมูล"
+        tools:layout="@layout/fragment_normal_detail" >
+        <argument
+            android:name="normalId"
+            app:argType="integer" />
+    </fragment>
+</navigation>

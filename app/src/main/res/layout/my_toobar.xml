@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/myToobar"
+    android:background="@color/purple_200"
+    android:elevation="8dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    >
+    <ImageView
+        android:id="@+id/imageSort"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="start"
+        android:src="@drawable/baseline_sort_24" />
+
+
+
+</androidx.appcompat.widget.Toolbar>

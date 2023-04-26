@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:background="@drawable/toolsbar_background">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Songkeit Klinnimnaul"
+                android:textStyle="bold|normal"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="verrifies"
+                android:textStyle="normal"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                />
+
+
+        </LinearLayout>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:padding="6dp"
+            app:shapeAppearanceOverlay="@style/Circular"
+            app:strokeWidth="2dp"
+            app:strokeColor="@android:color/darker_gray"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
