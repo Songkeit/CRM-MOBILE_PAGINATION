@@ -18,7 +18,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ezatpanah.hilt_retrofit_paging_youtube.Component.showCustomToast
@@ -36,6 +35,7 @@ class EmergencyFragment : Fragment() { // test main
 
     private lateinit var binding: FragmentEmergencyBinding
     private var editText: EditText? = null
+    private var dataSearch: String = "null"
     var textInputLayOut: TextInputLayout? = null
 
     @Inject
@@ -142,24 +142,41 @@ class EmergencyFragment : Fragment() { // test main
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         editText = view.findViewById(R.id.editText)
-
         textInputLayOut = view.findViewById(R.id.textInputLayOutEmergency)
+        var args = this.arguments
+        dataSearch = args?.getString("data").toString()
 
-        runningProgram()
-        textInputLayOut!!.setEndIconOnClickListener {
-            viewModel.search = editText!!.text.toString()
-            runningProgram()
-        }
+        runningProgram(dataSearch)
+//        textInputLayOut!!.setEndIconOnClickListener {
+//            viewModel.search = editText!!.text.toString()
+//            runningProgram()
+//        }
         // it will set data to loop recycleView
 
     }
 
-    private fun runningProgram() {
+    private fun runningProgram(dataSearch: String?) {
+        if (dataSearch == "null"){
+            viewModel.search = null
+        }else{
+            viewModel.search = dataSearch
+        }
         binding.apply {
             lifecycleScope.launchWhenCreated {
                 viewModel.moviesList.collect {
                     emergencyAdapter.submitData(it)
                 }
+            }
+            textInputLayOut!!.setEndIconOnClickListener {
+                Log.i("reload", "runningProgram: reload")
+                val bundle = Bundle()
+                bundle.putString("data", editText.text.toString())//
+                bundle.putString("checkDataString", "EmergencyFragment")
+                val dataToHome = EmergencyFragment()
+                dataToHome.arguments = bundle
+                fragmentManager?.beginTransaction()
+                    ?.replace(R.id.fragment_container, dataToHome)
+                    ?.commit()
             }
             //click to intent
             emergencyAdapter.setOnItemClickListener {
