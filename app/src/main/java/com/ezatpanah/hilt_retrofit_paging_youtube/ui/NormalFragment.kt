@@ -24,6 +24,7 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ezatpanah.hilt_retrofit_paging_youtube.Component.showCustomToast
 import com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.Adapter.LoadMoreAdapter
+import com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.MovieViewModel.EmergencyViewModel
 import com.ezatpanah.hilt_retrofit_paging_youtube.Normal.Adapter.NormalAdapter
 import com.ezatpanah.hilt_retrofit_paging_youtube.R
 import com.ezatpanah.hilt_retrofit_paging_youtube.databinding.FragmentNormalBinding
@@ -53,6 +54,81 @@ class NormalFragment : Fragment() {
         binding = FragmentNormalBinding.inflate(layoutInflater, container, false)
 
         return binding.root
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //click to intent
+        lifecycle.coroutineScope.launchWhenCreated {
+            viewModel.stateIntent.collect{
+                when(it){
+                    is NormalViewModel.StateControllerIntent.Success ->{
+                        val bundle = Bundle()
+                        bundle.putString("data", it.id.toString())//
+                        bundle.putString("checkDataString", "NormalFragment")
+                        val dataToHome = MainInformationFragment()
+                        dataToHome.arguments = bundle
+                        fragmentManager?.beginTransaction()
+                            ?.replace(R.id.fragment_container, dataToHome)
+                            ?.commit()
+                    }
+                    else -> {}
+                }
+            }
+        }
+
+        // click delete
+        lifecycle.coroutineScope.launchWhenCreated {
+            viewModel.stateDelete.collect{
+                when(it){
+                    is NormalViewModel.StateControllerDelete.Success ->{
+                        var sendDataDelete: DeleteData.Data =
+                            DeleteData.Data("1", it.id.toString())
+                        val dialog = context?.let { Dialog(it) }
+                        dialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                        dialog.setCancelable(false)
+                        dialog.setContentView(R.layout.custom_dialog)
+                        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                        val btnYes: Button = dialog.findViewById(R.id.btn_yes)
+                        val btnNo: Button = dialog.findViewById(R.id.btn_no)
+                        var tvMessage: TextView = dialog.findViewById(R.id.custom_message)
+                        dialog.show()
+                        tvMessage.text = "Are you sure to remove this data"
+                        btnYes.setOnClickListener {
+                            Log.i("delete", "onCreate: delete")
+                            viewModel.deleteDataApi(sendDataDelete)
+                            lifecycle.coroutineScope.launchWhenCreated {
+                                viewModel.state.collect {
+                                    when (it) {
+                                        is NormalViewModel.StateController.Success -> {
+                                            Toast(context).showCustomToast(
+                                                "ลบข้อมูลสำเร็จ",
+                                                this@NormalFragment,
+                                                R.color.success
+                                            )
+                                            val bundle = Bundle()
+                                            val dataToEmergency = NormalFragment()
+                                            dataToEmergency.arguments = bundle
+                                            fragmentManager?.beginTransaction()
+                                                ?.replace(R.id.fragment_container, dataToEmergency)
+                                                ?.commit()
+                                        }
+                                        else -> {}
+                                    }
+                                }
+                            }
+                            dialog.dismiss()
+                        }
+                        btnNo.setOnClickListener {
+                            Log.i("delete", "onCreate: delete error")
+                            dialog.dismiss()
+
+                        }
+                    }
+                    else -> {}
+                }
+            }
+        }
     }
 
     @SuppressLint("ResourceType")
@@ -86,76 +162,76 @@ class NormalFragment : Fragment() {
             }
             //click to intent
             normalAdapter.setOnItemClickListener {
-                val direction =
-                    NormalFragmentDirections.actionNormalFragmentToNormalDetailFragment(it.id!!)
-                findNavController().navigate(direction)
+                val data = it.id
+                Log.i("test01", "runningProgram: $data")
+                viewModel.getDataCheckIntent(data!!)
             }
 
             //delete
             normalAdapter.setOnItemClickListenerDeleteNormal {
-                Log.i("sDel", "runningProgram:success normal ")
-                var dataDelete = it
-                val dialog = context?.let { Dialog(it) }
-                dialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                dialog.setCancelable(false)
-                dialog.setContentView(R.layout.custom_dialog)
-                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                val btnYes: Button = dialog.findViewById(R.id.btn_yes)
-                val btnNo: Button = dialog.findViewById(R.id.btn_no)
-                var tvMessage: TextView = dialog.findViewById(R.id.custom_message)
-                dialog.show()
-                tvMessage.text = "Are you sure to remove this data"
-                btnYes.setOnClickListener {
-                    viewModel.getMovieDetail(dataDelete.id!!)
-                    lifecycle.coroutineScope.launchWhenCreated {
-                        viewModel.state.collect {
-                            when (it) {
-                                is NormalViewModel.StateController.Success -> {
-                                    var sendDataDelete: DeleteData.Data =
-                                        DeleteData.Data("1", dataDelete.id.toString())
-                                    viewModel.deleteDataApi(sendDataDelete)
-                                    lifecycle.coroutineScope.launchWhenCreated {
-                                        viewModel.state.collect {
-                                            when (it) {
-                                                is NormalViewModel.StateController.Success -> {
-                                                    Log.i("del1", "runningProgram: success")
-                                                    Toast(context).showCustomToast(
-                                                        "ลบข้อมูลสำเร็จ",
-                                                        this@NormalFragment,
-                                                        R.color.success
-                                                    )
-                                                    val bundle = Bundle()
-                                                    val dataToNormal = NormalFragment()
-                                                    dataToNormal.arguments = bundle
-                                                    fragmentManager?.beginTransaction()
-                                                        ?.replace(
-                                                            R.id.fragment_container,
-                                                            dataToNormal
-                                                        )?.commit()
-                                                }
-                                                is NormalViewModel.StateController.Error -> {
-                                                    Log.i("del1", "runningProgram: error")
-
-                                                    Toast(context).showCustomToast(
-                                                        "ลบข้อมูลไม่สำเร็จ",
-                                                        this@NormalFragment,
-                                                        R.color.danger
-                                                    )
-                                                }
-                                                else -> {}
-                                            }
-                                        }
-                                    }
-                                }
-                                else -> {}
-                            }
-                        }
-                    }
-                    dialog.dismiss()
-                }
-                btnNo.setOnClickListener {
-                    dialog.dismiss()
-                }
+                var dataDelete = it.id
+                viewModel.getDataCheckDelete(dataDelete!!)
+//                val dialog = context?.let { Dialog(it) }
+//                dialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
+//                dialog.setCancelable(false)
+//                dialog.setContentView(R.layout.custom_dialog)
+//                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+//                val btnYes: Button = dialog.findViewById(R.id.btn_yes)
+//                val btnNo: Button = dialog.findViewById(R.id.btn_no)
+//                var tvMessage: TextView = dialog.findViewById(R.id.custom_message)
+//                dialog.show()
+//                tvMessage.text = "Are you sure to remove this data"
+//                btnYes.setOnClickListener {
+//                    viewModel.getMovieDetail(dataDelete.id!!)
+//                    lifecycle.coroutineScope.launchWhenCreated {
+//                        viewModel.state.collect {
+//                            when (it) {
+//                                is NormalViewModel.StateController.Success -> {
+//                                    var sendDataDelete: DeleteData.Data =
+//                                        DeleteData.Data("1", dataDelete.id.toString())
+//                                    viewModel.deleteDataApi(sendDataDelete)
+//                                    lifecycle.coroutineScope.launchWhenCreated {
+//                                        viewModel.state.collect {
+//                                            when (it) {
+//                                                is NormalViewModel.StateController.Success -> {
+//                                                    Log.i("del1", "runningProgram: success")
+//                                                    Toast(context).showCustomToast(
+//                                                        "ลบข้อมูลสำเร็จ",
+//                                                        this@NormalFragment,
+//                                                        R.color.success
+//                                                    )
+//                                                    val bundle = Bundle()
+//                                                    val dataToNormal = NormalFragment()
+//                                                    dataToNormal.arguments = bundle
+//                                                    fragmentManager?.beginTransaction()
+//                                                        ?.replace(
+//                                                            R.id.fragment_container,
+//                                                            dataToNormal
+//                                                        )?.commit()
+//                                                }
+//                                                is NormalViewModel.StateController.Error -> {
+//                                                    Log.i("del1", "runningProgram: error")
+//
+//                                                    Toast(context).showCustomToast(
+//                                                        "ลบข้อมูลไม่สำเร็จ",
+//                                                        this@NormalFragment,
+//                                                        R.color.danger
+//                                                    )
+//                                                }
+//                                                else -> {}
+//                                            }
+//                                        }
+//                                    }
+//                                }
+//                                else -> {}
+//                            }
+//                        }
+//                    }
+//                    dialog.dismiss()
+//                }
+//                btnNo.setOnClickListener {
+//                    dialog.dismiss()
+//                }
 
             }
 

@@ -26,7 +26,7 @@ class EmergencyViewModel @Inject constructor(private val repository: ApiReposito
     val loading = MutableLiveData<Boolean>()
     var search:String? = null
 
-    val moviesList = Pager(PagingConfig(1)) {
+    val emergencyList = Pager(PagingConfig(1)) {
         EmergencyPagingSource(repository,search) // search
     }.flow.cachedIn(viewModelScope)
 

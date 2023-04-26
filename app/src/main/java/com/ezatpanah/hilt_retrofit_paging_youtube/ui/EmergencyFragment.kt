@@ -163,10 +163,11 @@ class EmergencyFragment : Fragment() { // test main
         }
         binding.apply {
             lifecycleScope.launchWhenCreated {
-                viewModel.moviesList.collect {
+                viewModel.emergencyList.collect {
                     emergencyAdapter.submitData(it)
                 }
             }
+            //search
             textInputLayOut!!.setEndIconOnClickListener {
                 Log.i("reload", "runningProgram: reload")
                 val bundle = Bundle()
@@ -187,7 +188,6 @@ class EmergencyFragment : Fragment() { // test main
 
             // click to delete
             emergencyAdapter.setOnItemClickListenerDeleteEmergency {
-                var dataDelete = it
                 var data = it.id
                 viewModel.getDataCheckDelete(data!!)
 
