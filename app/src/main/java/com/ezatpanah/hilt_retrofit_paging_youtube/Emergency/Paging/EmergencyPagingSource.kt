@@ -15,7 +15,7 @@ class EmergencyPagingSource(
         return try {
             // add page +=1
             val currentPage = params.key ?: 1
-            val response = repository.getPopularMoviesList(currentPage,search)
+            val response = repository.getEmergency(currentPage,search)
             val data = response.body()!!.data
 
             val responseData = mutableListOf<RequestCommonApi.Data>()

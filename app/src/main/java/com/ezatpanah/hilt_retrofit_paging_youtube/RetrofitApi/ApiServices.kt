@@ -21,7 +21,7 @@ interface ApiServices {
     //    https://api.themoviedb.org/3/
 
     @GET("petitionEmergency?")
-    suspend fun getPopularMoviesList(
+    suspend fun getEmergency(
         @Query("page") page: String,//1,2,3,4
         @Query("pageshow") pageshow: String,//25 50 100..
         @Query("keyword_search_all") keyword_search_all: String?, // จะต้องมีkey word การ search

@@ -33,17 +33,7 @@ class NormalViewModel @Inject constructor(
     var search: String? = null
 
     val normalList = Pager(PagingConfig(1)) {
-        Log.i("delstate", "qwe: ${Constancts.DEL_STATE}")
-        if (Constancts.DEL_STATE){
-            Log.i("pq", "check1: ")
-            NormalPagingSource(repository,search,"1")
-
-        }else{
-            Log.i("pq", "check1: ")
-            NormalPagingSource(repository,search,"0")
-
-        }
-
+        NormalPagingSource(repository,search,"1")
     }.flow.cachedIn(viewModelScope)
 
     private val _stateUpdate = MutableStateFlow<StateControllerUpdate>(StateControllerUpdate.Empty)

@@ -12,7 +12,7 @@ import javax.inject.Inject
 class ApiRepository @Inject constructor(
     private val apiServices: ApiServices,
 ) {
-    suspend fun getPopularMoviesList(page: Int, search: String?) = apiServices.getPopularMoviesList(
+    suspend fun getEmergency(page: Int, search: String?) = apiServices.getEmergency(
         page.toString(),
         "25",
         search,
