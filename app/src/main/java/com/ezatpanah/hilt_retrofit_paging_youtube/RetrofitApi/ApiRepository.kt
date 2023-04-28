@@ -54,6 +54,7 @@ class ApiRepository @Inject constructor(
     suspend fun serviceListDropdown() = apiServices.serviceList()
     suspend fun kioskDropdown() = apiServices.kioskList()
     suspend fun typeStory() = apiServices.typeStory()
+    suspend fun listUnsaved() = apiServices.listUnsaved()
     fun typeStoryAdapter() = apiServices.typeStoryAdapter()
     suspend fun getDataApiPetitionID(id: String) = apiServices.getPetitionId(id)// status have 1
 

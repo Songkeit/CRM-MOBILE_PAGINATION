@@ -13,33 +13,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:foregroundGravity="bottom"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toTopOf="parent">
+        android:gravity="center">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="40dp"
-            >
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="bottom"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="20dp"
-                android:backgroundTint="@color/white"
-                android:shadowColor="#000"
-                app:cardElevation="8dp"
-                app:cardPreventCornerOverlap="true"
 
-                android:shadowRadius="50"
-                app:cardCornerRadius="40dp">
+            >
+
 
 
                 <ScrollView
@@ -733,28 +714,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:visibility="gone" />
-            </androidx.cardview.widget.CardView>
         </RelativeLayout>
 
     </RelativeLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
-            android:drawableLeft="@drawable/baseline_save_as_24"
-            android:text="บันทึกข้อมูล"
-            android:textSize="20dp"
-            android:layout_gravity="right"
-            android:gravity="center|start"
-            android:layout_marginLeft="180dp"
 
-
-            />
-    </LinearLayout>
 
 
 </RelativeLayout>

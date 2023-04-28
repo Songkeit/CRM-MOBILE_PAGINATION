@@ -9,6 +9,7 @@ import com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.Model.ApiInformation
 import com.ezatpanah.hilt_retrofit_paging_youtube.Normal.Model.UpdateUser
 import com.ezatpanah.hilt_retrofit_paging_youtube.response.RequestCommonApi
 import com.ezatpanah.hilt_retrofit_paging_youtube.ui.DeleteData
+import com.ezatpanah.hilt_retrofit_paging_youtube.ui.PetitionUnSaveModel
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
@@ -92,6 +93,10 @@ interface ApiServices {
 
     @GET("petition/{id}")
     fun getPetitionId(@Path("id") id: String): Response<ApiInformationUser>
+
+    //unsaved
+    @GET("https://dev-apiicrm.ttrs.in.th/petitionUnsave?agentimport=agenttest01&service_name=vrs")
+    suspend fun listUnsaved(): Response<PetitionUnSaveModel>
 
 
 

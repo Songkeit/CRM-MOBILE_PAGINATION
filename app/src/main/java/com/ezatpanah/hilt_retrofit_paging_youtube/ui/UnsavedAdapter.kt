@@ -1,5 +1,4 @@
-package com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.Adapter
-
+package com.ezatpanah.hilt_retrofit_paging_youtube.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,30 +6,26 @@ import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ezatpanah.hilt_retrofit_paging_youtube.Home.Model.ServiceList
 import com.ezatpanah.hilt_retrofit_paging_youtube.Home.Model.TypeStoryModel
-import com.ezatpanah.hilt_retrofit_paging_youtube.RetrofitApi.ApiRepository
+import com.ezatpanah.hilt_retrofit_paging_youtube.R
+import com.ezatpanah.hilt_retrofit_paging_youtube.databinding.AdapterCardApiBinding
 import com.ezatpanah.hilt_retrofit_paging_youtube.databinding.ItemRecycleViewBinding
 import com.ezatpanah.hilt_retrofit_paging_youtube.response.RequestCommonApi
-import com.ezatpanah.hilt_retrofit_paging_youtube.ui.SharePreferenceManager
-import com.ezatpanah.hilt_retrofit_paging_youtube.ui.TypeStoryViewModel
 import com.google.gson.Gson
-import retrofit2.Call
-import retrofit2.Response
 import javax.inject.Inject
 
-class EmergencyAdapter @Inject() constructor(
+
+class UnsavedAdapter @Inject() constructor(
     private var preferManager: SharePreferenceManager
 
 ) :
-    PagingDataAdapter<RequestCommonApi.Data, EmergencyAdapter.ViewHolder>(differCallback) {
+    PagingDataAdapter<PetitionUnSaveModel.Agenttest01, UnsavedAdapter.ViewHolder>(differCallback) {
 
-    private lateinit var binding: ItemRecycleViewBinding
+    private lateinit var binding: AdapterCardApiBinding
     private lateinit var context: Context
 
     var typeStory = preferManager.getPreferenceTypeStory()
@@ -40,7 +35,7 @@ class EmergencyAdapter @Inject() constructor(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        binding = ItemRecycleViewBinding.inflate(inflater, parent, false)
+        binding = AdapterCardApiBinding.inflate(inflater, parent, false)
         context = parent.context
         return ViewHolder()
     }
@@ -53,30 +48,28 @@ class EmergencyAdapter @Inject() constructor(
     inner class ViewHolder : RecyclerView.ViewHolder(binding.root) {
 
         @SuppressLint("SetTextI18n")
-        fun bind(item: RequestCommonApi.Data) {
+        fun bind(item: PetitionUnSaveModel.Agenttest01) {
             var messageTypeStatus = item.messageTypeStatus // service radio buttom
             var messageTypeId = item.messageTypeId // id dropdown
             var serviceId = item.srctype // id dropdown
 
-            var (displayName,color,serviceName) = getName(messageTypeStatus, messageTypeId,serviceId)
+            //var (displayName,color,serviceName) = getName(messageTypeStatus, messageTypeId,serviceId)
             binding.apply {
-                typeCalling.text = displayName
-                typeCalling.setTextColor(Color.parseColor(color))
-                message.text = item.summaryAgent
-                agent.text = item.agentimport
-                channal.text = serviceName
-                dst.text = item.dst
-                srcValue.text = item.src
-                dateTime.text = item.datebegin
+                tvPhone.text = item.src
+                tvPhone.setTextColor(Color.parseColor("#4CAE50"))
+                tvTypePhone.text = item.serviceName
+                tvDate.text = item.datebegin
+//                typeCalling.text = displayName
+//                typeCalling.setTextColor(Color.parseColor(color))
+//                message.text = item.summaryAgent
+//                agent.text = item.agentimport
+//                channal.text = serviceName
+//                dst.text = item.dst
+//                srcValue.text = item.src
+//                dateTime.text = item.datebegin
 
                 cardOnClick.setOnClickListener {
                     onItemClickListener?.let {
-                        it(item)
-                    }
-                }
-                delete.setOnClickListener {
-                    onItemClickListenerDeleteEmergency?.let {
-                        Log.i("del", "runningProgram: ")
                         it(item)
                     }
                 }
@@ -141,30 +134,30 @@ class EmergencyAdapter @Inject() constructor(
     }
 
 
-    private var onItemClickListener: ((RequestCommonApi.Data) -> Unit)? = null
+    private var onItemClickListener: ((PetitionUnSaveModel.Agenttest01) -> Unit)? = null
 
-    private var onItemClickListenerDeleteEmergency: ((RequestCommonApi.Data) -> Unit)? = null
+    private var onItemClickListenerDeleteEmergency: ((PetitionUnSaveModel.Agenttest01) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (RequestCommonApi.Data) -> Unit) {
+    fun setOnItemClickListener(listener: (PetitionUnSaveModel.Agenttest01) -> Unit) {
         onItemClickListener = listener
     }
 
-    fun setOnItemClickListenerDeleteEmergency(listener: (RequestCommonApi.Data) -> Unit) {
+    fun setOnItemClickListenerDeleteEmergency(listener: (PetitionUnSaveModel.Agenttest01) -> Unit) {
         onItemClickListenerDeleteEmergency = listener
     }
 
     companion object {
-        val differCallback = object : DiffUtil.ItemCallback<RequestCommonApi.Data>() {
+        val differCallback = object : DiffUtil.ItemCallback<PetitionUnSaveModel.Agenttest01>() {
             override fun areItemsTheSame(
-                oldItem: RequestCommonApi.Data,
-                newItem: RequestCommonApi.Data
+                oldItem: PetitionUnSaveModel.Agenttest01,
+                newItem: PetitionUnSaveModel.Agenttest01
             ): Boolean {
                 return oldItem.id == oldItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: RequestCommonApi.Data,
-                newItem: RequestCommonApi.Data
+                oldItem: PetitionUnSaveModel.Agenttest01,
+                newItem: PetitionUnSaveModel.Agenttest01
             ): Boolean {
                 return oldItem == newItem
             }

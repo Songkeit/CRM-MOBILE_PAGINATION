@@ -185,71 +185,12 @@ class EmergencyFragment : Fragment() { // test main
                 Log.i("test01", "runningProgram: $data")
                 viewModel.getDataCheckIntent(data!!)
             }
-
             // click to delete
             emergencyAdapter.setOnItemClickListenerDeleteEmergency {
                 var data = it.id
                 viewModel.getDataCheckDelete(data!!)
 
-//                btnYes.setOnClickListener {
-//                    viewModel.getMovieDetail(dataDelete.id!!) // check data list emergency have not null
-//                    lifecycle.coroutineScope.launchWhenCreated {
-//                        viewModel.state.collect {
-//                            when (it) {
-//                                is EmergencyViewModel.StateController.Success -> {
-//                                    Log.i("sDel", "runningProgram:success ")
-//                                    var sendDataDelete: DeleteData.Data =
-//                                        DeleteData.Data("1", dataDelete.id.toString())
-//                                    viewModel.deleteDataApi(sendDataDelete)
-//                                    lifecycle.coroutineScope.launchWhenCreated {
-//                                        viewModel.state.collect {
-//                                            when (it) {
-//                                                is EmergencyViewModel.StateController.Success -> {
-//                                                    Log.i("del1", "runningProgram: success")
-//
-//                                                    Toast(context).showCustomToast(
-//                                                        "ลบข้อมูลสำเร็จ",
-//                                                        this@EmergencyFragment,
-//                                                        R.color.success
-//                                                    )
-//                                                    val bundle = Bundle()
-//                                                    val dataToEmergency = EmergencyFragment()
-//                                                    dataToEmergency.arguments = bundle
-//                                                    fragmentManager?.beginTransaction()
-//                                                        ?.replace(R.id.fragment_container, dataToEmergency)?.commit()
-//                                                }
-//                                                is EmergencyViewModel.StateController.Error -> {
-//                                                    Log.i("del1", "runningProgram: error")
-//
-//                                                    Toast(context).showCustomToast(
-//                                                        "ลบข้อมูลไม่สำเร็จ",
-//                                                        this@EmergencyFragment,
-//                                                        R.color.danger
-//                                                    )
-//                                                }
-//                                                else -> {}
-//                                            }
-//                                        }
-//                                    }
-//                                }
-//                                is EmergencyViewModel.StateController.Error ->{
-//                                    Log.i("del1", "runningProgram: error")
-//                                    Toast(context).showCustomToast(
-//                                        "ลบข้อมูลไม่สำเร็จ",
-//                                        this@EmergencyFragment,
-//                                        R.color.danger
-//                                    )
-//                                }
-//                                else -> {}
-//                            }
-//                        }
-//                    }
-//                    dialog.dismiss()
-//
-//                }
-//                btnNo.setOnClickListener {
-//                    dialog.dismiss()
-//                }
+
 
 
             }

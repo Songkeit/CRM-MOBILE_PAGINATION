@@ -13,6 +13,7 @@ class SharePreferenceManager @Inject constructor(@ApplicationContext context: Co
 
     private var prefsTypeStory = context.getSharedPreferences("PREFS_TOKEN_FILE",Context.MODE_PRIVATE)
     private var prefsServiceList = context.getSharedPreferences("PREFS_TOKEN_FILE_SERVICE",Context.MODE_PRIVATE)
+    private var prefsStateDelete = context.getSharedPreferences("PREFS_TOKEN_FILE_DELETE",Context.MODE_PRIVATE)
 
     private var gson = Gson()
     fun savePreferenceTypeStory(items: TypeStoryModel?){
@@ -22,6 +23,15 @@ class SharePreferenceManager @Inject constructor(@ApplicationContext context: Co
         val jsonString = gson.toJson(items)
         Log.i("json", "savePreference: $jsonString")
         editor.putString("userItems",jsonString)
+        editor.apply()
+
+    }
+    fun saveStateDelete(state: String?){
+        var editor = prefsStateDelete.edit()
+////        editor.putString(USER_ITEM,items)
+//        val jsonString = gson.toJson(state)
+//        Log.i("json", "savePreference: $jsonString")
+        editor.putString("userItemsDelete",state)
         editor.apply()
 
     }
@@ -42,6 +52,10 @@ class SharePreferenceManager @Inject constructor(@ApplicationContext context: Co
 
     fun getPreferenceTypeStory(): String? {
         return prefsTypeStory.getString("userItems",null)
+    }
+
+    fun getStateDelete(): String? {
+        return prefsStateDelete.getString("userItemsDelete",null)
     }
 
 

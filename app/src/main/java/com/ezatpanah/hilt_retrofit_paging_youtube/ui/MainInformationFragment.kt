@@ -77,8 +77,6 @@ class MainInformationFragment : Fragment() {
     @Inject
     lateinit var preferManager: SharePreferenceManager
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -130,7 +128,7 @@ class MainInformationFragment : Fragment() {
                         is MainInformationViewModel.StateController.Success -> {
                             var argsData = it.data
                             sendData = argsData!!
-                            if (argsData!!.insertStatus == 2) {
+                            if (argsData!!.insertStatus == 2 && fromPageName =="UnsavedFragment") {
                                 sendData.insertStatus = 1
                             }
                             Log.i("swndData", "onViewCreated: ${it.data}")

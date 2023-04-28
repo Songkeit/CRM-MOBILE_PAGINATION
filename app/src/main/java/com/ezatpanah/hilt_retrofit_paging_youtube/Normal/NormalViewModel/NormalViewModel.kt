@@ -11,10 +11,10 @@ import com.ezatpanah.hilt_retrofit_paging_youtube.Home.Model.KioskList
 import com.ezatpanah.hilt_retrofit_paging_youtube.Home.Model.ServiceList
 import com.ezatpanah.hilt_retrofit_paging_youtube.Home.Model.TypeStoryModel
 import com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.Model.ApiInformationUser
-import com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.MovieViewModel.EmergencyViewModel
 
 import com.ezatpanah.hilt_retrofit_paging_youtube.Normal.Paging.NormalPagingSource
 import com.ezatpanah.hilt_retrofit_paging_youtube.RetrofitApi.ApiRepository
+import com.ezatpanah.hilt_retrofit_paging_youtube.ui.Constancts
 import com.ezatpanah.hilt_retrofit_paging_youtube.ui.DeleteData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,19 +24,26 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class NormalViewModel @Inject constructor(private val repository: ApiRepository) : ViewModel() {
+class NormalViewModel @Inject constructor(
+    private val repository: ApiRepository,
+
+) : ViewModel() {
 
     val loading = MutableLiveData<Boolean>()
     var search: String? = null
-    var stateClickDelete: Boolean = true
-
 
     val normalList = Pager(PagingConfig(1)) {
-        if (stateClickDelete){
-            NormalPagingSource(repository,search,"0")
-        }else{
+        Log.i("delstate", "qwe: ${Constancts.DEL_STATE}")
+        if (Constancts.DEL_STATE){
+            Log.i("pq", "check1: ")
             NormalPagingSource(repository,search,"1")
+
+        }else{
+            Log.i("pq", "check1: ")
+            NormalPagingSource(repository,search,"0")
+
         }
+
     }.flow.cachedIn(viewModelScope)
 
     private val _stateUpdate = MutableStateFlow<StateControllerUpdate>(StateControllerUpdate.Empty)
