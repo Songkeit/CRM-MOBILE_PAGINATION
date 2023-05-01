@@ -17,7 +17,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
@@ -31,6 +30,7 @@ import com.ezatpanah.hilt_retrofit_paging_youtube.Normal.NormalViewModel.NormalV
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class NormalFragment : Fragment() {
@@ -45,7 +45,7 @@ class NormalFragment : Fragment() {
 
     //var btnCheck: Boolean = false
     private var dataSearch: String = "null"
-
+    private var btnCheck by Delegates.notNull<Boolean>()
 
 
     @Inject
@@ -146,7 +146,11 @@ class NormalFragment : Fragment() {
         btnMode = view.findViewById(R.id.btn_mode_delete)
         var args = this.arguments
         dataSearch = args?.getString("data").toString()
-        runningProgram(dataSearch)
+        var argsStateDel = this.arguments
+
+        btnCheck = argsStateDel?.getBoolean("dataDel") == true
+        runningProgram(dataSearch,btnCheck)
+
 
 //        if (stateDel){
 //            viewModelStateDelete.setDelete(true)
@@ -154,23 +158,23 @@ class NormalFragment : Fragment() {
 //            viewModelStateDelete.setDelete(false)
 //        }
 
-//        btnMode!!.setOnClickListener{
-//            btnCheck = !(btnCheck)
-//            viewModel.stateClickDelete = btnCheck
-//
-//        }
-        //  viewModel.stateClickDelete = btnCheck
 
 
     }
 
-    private fun runningProgram(dataSearch: String) {
-
+    private fun runningProgram(dataSearch: String, btnCheck: Boolean) {
+        Log.i("st", "onViewCreated: ${this.btnCheck}")
         if (dataSearch == "null") {
             viewModel.search = null
         } else {
             viewModel.search = dataSearch
         }
+//        if (btnCheck == "null"){
+//            viewModel.stateDel = "0"
+//        }else{
+//            viewModel.stateDel = "1"
+//        }
+
         binding.apply {
             lifecycleScope.launchWhenCreated {
                 viewModel.normalList.collect {
@@ -181,6 +185,18 @@ class NormalFragment : Fragment() {
             textInputLayOut!!.setEndIconOnClickListener {
                 val bundle = Bundle()
                 bundle.putString("data", editText!!.text.toString())//
+                bundle.putString("checkDataString", "NormalFragment")
+                val dataToHome = NormalFragment()
+                dataToHome.arguments = bundle
+                fragmentManager?.beginTransaction()
+                    ?.replace(R.id.fragment_container, dataToHome)
+                    ?.commit()
+            }
+            btnMode!!.setOnClickListener {
+                this@NormalFragment.btnCheck = !(btnCheck)
+                viewModel.stateDel = btnCheck
+                val bundle = Bundle()
+                bundle.putBoolean("dataDel", btnCheck)//
                 bundle.putString("checkDataString", "NormalFragment")
                 val dataToHome = NormalFragment()
                 dataToHome.arguments = bundle

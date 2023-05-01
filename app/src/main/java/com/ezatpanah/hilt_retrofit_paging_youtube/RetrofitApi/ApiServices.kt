@@ -8,9 +8,7 @@ import com.ezatpanah.hilt_retrofit_paging_youtube.Home.Model.ServiceList
 import com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.Model.ApiInformationUser
 import com.ezatpanah.hilt_retrofit_paging_youtube.Normal.Model.UpdateUser
 import com.ezatpanah.hilt_retrofit_paging_youtube.response.RequestCommonApi
-import com.ezatpanah.hilt_retrofit_paging_youtube.ui.DeleteData
-import com.ezatpanah.hilt_retrofit_paging_youtube.ui.PetitionUnSaveModel
-import com.ezatpanah.hilt_retrofit_paging_youtube.ui.SeatsModelApi
+import com.ezatpanah.hilt_retrofit_paging_youtube.ui.*
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
@@ -85,6 +83,28 @@ interface ApiServices {
     //Seat
     @GET("https://dev-api.ttrs.in.th/v3/services/8/seats")
     suspend fun seatsVrs(): Response<SeatsModelApi>
+
+    //contact
+    @GET("https://dev-api.ttrs.in.th/v3/services/videophones?")
+    suspend fun contactProvince(
+        @Query("pagination") pagination: String?, // default = false if data not empty
+        @Query("search") search: String?, //input
+        @Query("group_id") group_id: String?, // 1
+        @Query("per_page") per_page: String?, // 200
+    ): Response<ProvinceModel>
+
+    //contact people
+    @GET("https://dev-apiicrm.ttrs.in.th/destinationList?")
+    suspend fun contactSearch(
+        @Query("keyword_search_all") keyword_search_all: String?,
+        ):Response<ContactSearchModel>
+
+    //contact
+    @GET("https://dev-api.ttrs.in.th//v3/services/videophones")
+    suspend fun searchAgency(
+        @Query("search") search: String?, //input
+        @Query("per_page") per_page: String?, // 100
+    ):Response<ProvinceModel>
 
     //dropDown
     @GET("https://dev-api.ttrs.in.th/v3/petitions/services/VRS?all=true")

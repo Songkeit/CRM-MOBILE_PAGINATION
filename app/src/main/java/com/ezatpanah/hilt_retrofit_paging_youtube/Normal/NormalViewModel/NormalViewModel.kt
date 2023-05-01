@@ -21,6 +21,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.math.log
 
 
 @HiltViewModel
@@ -31,9 +32,16 @@ class NormalViewModel @Inject constructor(
 
     val loading = MutableLiveData<Boolean>()
     var search: String? = null
+    var stateDel: Boolean = true
 
     val normalList = Pager(PagingConfig(1)) {
-        NormalPagingSource(repository,search,"0")
+        Log.i("state", "tes: $stateDel")
+        if (stateDel){
+            NormalPagingSource(repository,search,"0")
+        }else{
+            NormalPagingSource(repository,search,"1")
+        }
+
     }.flow.cachedIn(viewModelScope)
 
     private val _stateUpdate = MutableStateFlow<StateControllerUpdate>(StateControllerUpdate.Empty)

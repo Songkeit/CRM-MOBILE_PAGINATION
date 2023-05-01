@@ -15,7 +15,6 @@ class NormalPagingSource(
     private val search: String?,
     private val stateCheckDelete: String?,
 ) : PagingSource<Int, RequestCommonApi.Data>() {
-    private lateinit var binding: FragmentNormalBinding
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, RequestCommonApi.Data> {
         return try {
