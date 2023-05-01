@@ -53,6 +53,7 @@ class ApiRepository @Inject constructor(
     suspend fun deleteEmergency(id: DeleteData.Data) = apiServices.delete(id)// status have 1
     suspend fun serviceListDropdown() = apiServices.serviceList()
     suspend fun kioskDropdown() = apiServices.kioskList()
+    suspend fun seatsVrs() = apiServices.seatsVrs()
     suspend fun typeStory() = apiServices.typeStory()
     suspend fun listUnsaved() = apiServices.listUnsaved()
     fun typeStoryAdapter() = apiServices.typeStoryAdapter()

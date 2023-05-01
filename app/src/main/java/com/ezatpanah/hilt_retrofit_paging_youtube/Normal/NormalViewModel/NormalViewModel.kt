@@ -33,7 +33,7 @@ class NormalViewModel @Inject constructor(
     var search: String? = null
 
     val normalList = Pager(PagingConfig(1)) {
-        NormalPagingSource(repository,search,"1")
+        NormalPagingSource(repository,search,"0")
     }.flow.cachedIn(viewModelScope)
 
     private val _stateUpdate = MutableStateFlow<StateControllerUpdate>(StateControllerUpdate.Empty)

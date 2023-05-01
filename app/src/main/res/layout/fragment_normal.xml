@@ -79,7 +79,7 @@
         tools:ignore="MissingConstraints">
 
 
-        <androidx.cardview.widget.CardView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="bottom"
@@ -108,7 +108,7 @@
             <ProgressBar
                 android:id="@+id/prgBarMovies"
                 style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_gravity="center"
@@ -139,7 +139,7 @@
             </LinearLayout>
 
 
-        </androidx.cardview.widget.CardView>
+        </RelativeLayout>
     </RelativeLayout>
 
 

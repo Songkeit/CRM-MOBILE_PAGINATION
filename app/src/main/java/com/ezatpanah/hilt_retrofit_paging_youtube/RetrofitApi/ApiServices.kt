@@ -10,6 +10,7 @@ import com.ezatpanah.hilt_retrofit_paging_youtube.Normal.Model.UpdateUser
 import com.ezatpanah.hilt_retrofit_paging_youtube.response.RequestCommonApi
 import com.ezatpanah.hilt_retrofit_paging_youtube.ui.DeleteData
 import com.ezatpanah.hilt_retrofit_paging_youtube.ui.PetitionUnSaveModel
+import com.ezatpanah.hilt_retrofit_paging_youtube.ui.SeatsModelApi
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
@@ -80,6 +81,10 @@ interface ApiServices {
 
     @GET("https://dev-api.ttrs.in.th/v3/services/kiosks?pagination=false")
     suspend fun kioskList(): Response<KioskList>
+
+    //Seat
+    @GET("https://dev-api.ttrs.in.th/v3/services/8/seats")
+    suspend fun seatsVrs(): Response<SeatsModelApi>
 
     //dropDown
     @GET("https://dev-api.ttrs.in.th/v3/petitions/services/VRS?all=true")

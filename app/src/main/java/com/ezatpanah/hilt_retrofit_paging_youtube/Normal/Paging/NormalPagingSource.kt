@@ -1,9 +1,12 @@
 package com.ezatpanah.hilt_retrofit_paging_youtube.Normal.Paging
 
 import android.util.Log
+import android.view.View
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.ezatpanah.hilt_retrofit_paging_youtube.RetrofitApi.ApiRepository
+import com.ezatpanah.hilt_retrofit_paging_youtube.databinding.FragmentNormalBinding
+import com.ezatpanah.hilt_retrofit_paging_youtube.databinding.ItemRecycleViewBinding
 import com.ezatpanah.hilt_retrofit_paging_youtube.response.RequestCommonApi
 import retrofit2.HttpException
 
@@ -12,6 +15,7 @@ class NormalPagingSource(
     private val search: String?,
     private val stateCheckDelete: String?,
 ) : PagingSource<Int, RequestCommonApi.Data>() {
+    private lateinit var binding: FragmentNormalBinding
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, RequestCommonApi.Data> {
         return try {
@@ -19,7 +23,6 @@ class NormalPagingSource(
             val currentPage = params.key ?: 1
             val response = repository.getNormal(currentPage,search,stateCheckDelete)
             val data = response.body()!!.data
-            Log.i("D1", "load: $data")
 
             val responseData = mutableListOf<RequestCommonApi.Data>()
             responseData.addAll(data)
