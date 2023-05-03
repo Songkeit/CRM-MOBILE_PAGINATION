@@ -37,9 +37,9 @@ class NormalViewModel @Inject constructor(
     val normalList = Pager(PagingConfig(1)) {
         Log.i("state", "tes: $stateDel")
         if (stateDel){
-            NormalPagingSource(repository,search,"0")
-        }else{
             NormalPagingSource(repository,search,"1")
+        }else{
+            NormalPagingSource(repository,search,"0")
         }
 
     }.flow.cachedIn(viewModelScope)

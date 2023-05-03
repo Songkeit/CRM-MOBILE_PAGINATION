@@ -30,7 +30,6 @@ import com.ezatpanah.hilt_retrofit_paging_youtube.Normal.NormalViewModel.NormalV
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class NormalFragment : Fragment() {
@@ -45,7 +44,7 @@ class NormalFragment : Fragment() {
 
     //var btnCheck: Boolean = false
     private var dataSearch: String = "null"
-    private var btnCheck by Delegates.notNull<Boolean>()
+    private var dataDel: Boolean? = false
 
 
     @Inject
@@ -153,14 +152,17 @@ class NormalFragment : Fragment() {
         var args = this.arguments
         dataSearch = args?.getString("data").toString()
         var argsStateDel = this.arguments
+        dataDel = argsStateDel?.getBoolean("dataDel") == dataDel
+        Log.i("q", "onViewCreated: $dataDel")
         if (dataSearch.isNullOrEmpty()|| dataSearch =="null"){
             editText.text = null
         }else{
             editText.setText(dataSearch)
         }
 
-        btnCheck = argsStateDel?.getBoolean("dataDel") == true
-        runningProgram(dataSearch,btnCheck)
+
+        //btnCheck = argsStateDel?.getBoolean("dataDel") == true
+        runningProgram(dataSearch,dataDel)
 
 
 //        if (stateDel){
@@ -173,13 +175,16 @@ class NormalFragment : Fragment() {
 
     }
 
-    private fun runningProgram(dataSearch: String?, btnCheck: Boolean) {
-        Log.i("st", "onViewCreated: ${this.btnCheck}")
+    private fun runningProgram(dataSearch: String?, dataDel: Boolean?) {
         if (dataSearch == "null") {
             viewModel.search = null
         } else {
             viewModel.search = dataSearch
         }
+        if (dataDel != null) {
+            viewModel.stateDel = dataDel
+        }
+
 //        if (btnCheck == "null"){
 //            viewModel.stateDel = "0"
 //        }else{
@@ -196,6 +201,7 @@ class NormalFragment : Fragment() {
             textInputLayOut!!.setEndIconOnClickListener {
                 val bundle = Bundle()
                 bundle.putString("data", editText!!.text.toString())//
+                bundle.putBoolean("dataDel", !(dataDel)!!)//
                 bundle.putString("checkDataString", "NormalFragment")
                 val dataToHome = NormalFragment()
                 dataToHome.arguments = bundle
@@ -204,16 +210,27 @@ class NormalFragment : Fragment() {
                     ?.commit()
             }
             btnMode!!.setOnClickListener {
-                this@NormalFragment.btnCheck = !(btnCheck)
-                viewModel.stateDel = btnCheck
+                this@NormalFragment.dataDel = (!dataDel!!)
+                Log.i("789", "runningProgram: $dataDel")
                 val bundle = Bundle()
-                bundle.putBoolean("dataDel", btnCheck)//
+                bundle.putBoolean("dataDel", dataDel)//
                 bundle.putString("checkDataString", "NormalFragment")
                 val dataToHome = NormalFragment()
                 dataToHome.arguments = bundle
                 fragmentManager?.beginTransaction()
                     ?.replace(R.id.fragment_container, dataToHome)
                     ?.commit()
+
+//                this@NormalFragment.btnCheck = !(btnCheck)
+//                viewModel.stateDel = btnCheck
+//                val bundle = Bundle()
+//                bundle.putBoolean("dataDel", btnCheck)//
+//                bundle.putString("checkDataString", "NormalFragment")
+//                val dataToHome = NormalFragment()
+//                dataToHome.arguments = bundle
+//                fragmentManager?.beginTransaction()
+//                    ?.replace(R.id.fragment_container, dataToHome)
+//                    ?.commit()
             }
 
 //            btnModeDelete.setOnClickListener {
