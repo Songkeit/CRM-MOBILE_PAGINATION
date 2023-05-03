@@ -34,7 +34,7 @@ import javax.inject.Inject
 class EmergencyFragment : Fragment() { // test main
 
     private lateinit var binding: FragmentEmergencyBinding
-    private var editText: EditText? = null
+    private lateinit var editText: EditText
     private var dataSearch: String = "null"
     var textInputLayOut: TextInputLayout? = null
 
@@ -70,6 +70,12 @@ class EmergencyFragment : Fragment() { // test main
                         fragmentManager?.beginTransaction()
                             ?.replace(R.id.fragment_container, dataToHome)
                             ?.commit()
+                    }
+                    is EmergencyViewModel.StateControllerIntent.Error ->{
+                        Toast(context).showCustomToast(
+                            it.message, this@EmergencyFragment,
+                            R.color.danger
+                        )
                     }
                     else -> {}
                 }
@@ -145,6 +151,11 @@ class EmergencyFragment : Fragment() { // test main
         textInputLayOut = view.findViewById(R.id.textInputLayOutEmergency)
         var args = this.arguments
         dataSearch = args?.getString("data").toString()
+        if (dataSearch.isNullOrEmpty() || dataSearch =="null"){
+            editText.text = null
+        }else{
+            editText.setText(dataSearch)
+        }
 
         runningProgram(dataSearch)
 //        textInputLayOut!!.setEndIconOnClickListener {

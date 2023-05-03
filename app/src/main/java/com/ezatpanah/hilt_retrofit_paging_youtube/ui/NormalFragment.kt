@@ -36,7 +36,7 @@ import kotlin.properties.Delegates
 class NormalFragment : Fragment() {
 
     private lateinit var binding: FragmentNormalBinding
-    private var editText: EditText? = null
+    private lateinit var editText: EditText
     var textInputLayOut: TextInputLayout? = null
     var btnMode: Button? = null
 
@@ -78,6 +78,12 @@ class NormalFragment : Fragment() {
                         fragmentManager?.beginTransaction()
                             ?.replace(R.id.fragment_container, dataToHome)
                             ?.commit()
+                    }
+                    is NormalViewModel.StateControllerIntent.Error ->{
+                        Toast(context).showCustomToast(
+                            it.message, this@NormalFragment,
+                            R.color.danger
+                        )
                     }
                     else -> {}
                 }
@@ -147,6 +153,11 @@ class NormalFragment : Fragment() {
         var args = this.arguments
         dataSearch = args?.getString("data").toString()
         var argsStateDel = this.arguments
+        if (dataSearch.isNullOrEmpty()|| dataSearch =="null"){
+            editText.text = null
+        }else{
+            editText.setText(dataSearch)
+        }
 
         btnCheck = argsStateDel?.getBoolean("dataDel") == true
         runningProgram(dataSearch,btnCheck)
@@ -162,7 +173,7 @@ class NormalFragment : Fragment() {
 
     }
 
-    private fun runningProgram(dataSearch: String, btnCheck: Boolean) {
+    private fun runningProgram(dataSearch: String?, btnCheck: Boolean) {
         Log.i("st", "onViewCreated: ${this.btnCheck}")
         if (dataSearch == "null") {
             viewModel.search = null

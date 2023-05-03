@@ -31,7 +31,6 @@ class ContactSearchViewModel @Inject constructor(
     lateinit var apiModelAdapterSearchProvince: APIModelAdapterSearch
     lateinit var apiModelAdapterAgency: APIModelAdapterAgency
 
-
     fun getDataFromApiProvinceSearchDestination(search: String) = viewModelScope.launch { // คนปกติ
         _state.value = StateController.Loading
         val response = repository.contactSearch(search)
@@ -45,32 +44,6 @@ class ContactSearchViewModel @Inject constructor(
         }else{
             _state.value = StateController.Error("FAIL")
         }
-//        ApiService.endpointprovincesearch.contactSearch(
-//            search
-//        ).enqueue(object : retrofit2.Callback<ContactSearchModel> {
-//            override fun onResponse(
-//                call: Call<ContactSearchModel>,
-//                response: Response<ContactSearchModel>
-//            ) {
-//                if (response.isSuccessful){
-//                    if (response.body()!!.data.isNotEmpty()){
-//                        _state.value = StateController.Success("OK")
-//                        showResult(response.body()!!)
-//                    }else{
-//                        _state.value = StateController.Empty
-//                    }
-//
-//                }else{
-//                    _state.value = StateController.Error("FAIL")
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<ContactSearchModel>, t: Throwable) {
-//                TODO("Not yet implemented")
-//            }
-//
-//
-//        })
     }
 
 

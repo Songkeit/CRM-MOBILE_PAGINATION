@@ -145,7 +145,7 @@ class EmergencyViewModel @Inject constructor(private val repository: ApiReposito
             _stateintent.value = StateControllerIntent.Success(id)
             Log.i("check intent", "getDataCheckIntent: success")
         }else{
-            _stateintent.value = StateControllerIntent.Error("Error")
+            _stateintent.value = StateControllerIntent.Error("ไม่สามารถดูข้อมูลได้")
             Log.i("check intent", "getDataCheckIntent: error")
 
         }

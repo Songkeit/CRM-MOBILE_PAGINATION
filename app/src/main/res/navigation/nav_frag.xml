@@ -18,8 +18,7 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.ezatpanah.hilt_retrofit_paging_youtube.ui.Hilt_HomeFragment"
-        android:label="Home"
-        tools:layout="@layout/activity_detail" >
+        android:label="Home">
         <action
             android:id="@+id/action_nav_home_self"
             app:destination="@id/nav_home" />
@@ -36,8 +35,7 @@
     <fragment
         android:id="@+id/nav_normal"
         android:name="com.ezatpanah.hilt_retrofit_paging_youtube.ui.Hilt_NormalDetailFragment"
-        android:label="Normal"
-        tools:layout="@layout/activity_normal" >
+        android:label="Normal">
         <action
             android:id="@+id/action_nav_normal_to_nav_home"
             app:destination="@id/nav_home" />
@@ -45,8 +43,7 @@
     <fragment
         android:id="@+id/nav_UnSave"
         android:name="com.ezatpanah.hilt_retrofit_paging_youtube.ui.UnsavedFragment"
-        android:label="UnSave"
-        tools:layout="@layout/activity_unsave" >
+        android:label="UnSave">
         <action
             android:id="@+id/action_nav_UnSave_to_nav_home"
             app:destination="@id/nav_home" />
