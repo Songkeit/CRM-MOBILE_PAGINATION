@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ezatpanah.hilt_retrofit_paging_youtube.Home.Model.ServiceList
 import com.ezatpanah.hilt_retrofit_paging_youtube.Home.Model.TypeStoryModel
+import com.ezatpanah.hilt_retrofit_paging_youtube.R
 import com.ezatpanah.hilt_retrofit_paging_youtube.databinding.ItemMoviesBinding
 import com.ezatpanah.hilt_retrofit_paging_youtube.databinding.ItemRecycleViewBinding
 import com.ezatpanah.hilt_retrofit_paging_youtube.response.RequestCommonApi
@@ -31,6 +32,7 @@ class NormalAdapter @Inject() constructor(
     var typeService = preferManager.getPreferenceService()
     val typeName = Gson().fromJson(typeStory, TypeStoryModel::class.java)
     val serviceList = Gson().fromJson(typeService, ServiceList::class.java)
+    var stateIcon:Boolean? = true
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -66,18 +68,30 @@ class NormalAdapter @Inject() constructor(
                 dst.text = item.dst
                 srcValue.text = item.src
                 dateTime.text = item.datebegin
+                if (stateIcon!!){
+                    delete.setImageResource(R.drawable.baseline_restore_24)
+                    delete.setOnClickListener {
+                        onItemClickListenerDeleteNormal?.let {
+                            Log.i("del", "runningProgram: ")
+                            it(item)
+                        }
+                    }
+                }else{
+                    delete.setImageResource(R.drawable.baseline_delete_24)
+                    delete.setOnClickListener {
+                        onItemClickListenerDeleteNormal?.let {
+                            Log.i("del", "runningProgram: ")
+                            it(item)
+                        }
+                    }
+                }
 
                 cardOnClick.setOnClickListener {
                     onItemClickListener?.let {
                         it(item)
                     }
                 }
-                delete.setOnClickListener {
-                    onItemClickListenerDeleteNormal?.let {
-                        Log.i("del", "runningProgram: ")
-                        it(item)
-                    }
-                }
+
             }
         }
     }

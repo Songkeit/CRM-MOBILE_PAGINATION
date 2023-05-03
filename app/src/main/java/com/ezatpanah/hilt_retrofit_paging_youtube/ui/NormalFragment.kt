@@ -95,7 +95,7 @@ class NormalFragment : Fragment() {
                 when (it) {
                     is NormalViewModel.StateControllerDelete.Success -> {
                         var sendDataDelete: DeleteData.Data =
-                            DeleteData.Data("1", it.id.toString())
+                            if (dataDel!!) DeleteData.Data("0", it.id.toString()) else DeleteData.Data("1", it.id.toString())
                         val dialog = context?.let { Dialog(it) }
                         dialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
                         dialog.setCancelable(false)
@@ -105,7 +105,7 @@ class NormalFragment : Fragment() {
                         val btnNo: Button = dialog.findViewById(R.id.btn_no)
                         var tvMessage: TextView = dialog.findViewById(R.id.custom_message)
                         dialog.show()
-                        tvMessage.text = "Are you sure to remove this data"
+                        tvMessage.text = if (dataDel!!) "Are you sure to restore this data" else "Are you sure to remove this data"
                         btnYes.setOnClickListener {
                             Log.i("delete", "onCreate: delete")
                             viewModel.deleteDataApi(sendDataDelete)
@@ -119,6 +119,7 @@ class NormalFragment : Fragment() {
                                                 R.color.success
                                             )
                                             val bundle = Bundle()
+                                            bundle.putBoolean("dataDel", !(dataDel)!!)//
                                             val dataToEmergency = NormalFragment()
                                             dataToEmergency.arguments = bundle
                                             fragmentManager?.beginTransaction()
@@ -159,6 +160,8 @@ class NormalFragment : Fragment() {
         }else{
             editText.setText(dataSearch)
         }
+        normalAdapter.stateIcon = dataDel
+
 
 
         //btnCheck = argsStateDel?.getBoolean("dataDel") == true
@@ -287,11 +290,10 @@ class NormalFragment : Fragment() {
             //click to intent
             normalAdapter.setOnItemClickListener {
                 val data = it.id
-                Log.i("test01", "runningProgram: $data")
                 viewModel.getDataCheckIntent(data!!)
             }
 
-            //delete
+            //delete & restore
             normalAdapter.setOnItemClickListenerDeleteNormal {
                 var dataDelete = it.id
                 viewModel.getDataCheckDelete(dataDelete!!)

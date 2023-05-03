@@ -215,7 +215,7 @@ class NormalViewModel @Inject constructor(
 
         }
     }
-    fun getDataCheckDelete(id: Int) = viewModelScope.launch {// see data
+    fun getDataCheckDelete(id: Int,) = viewModelScope.launch {// see data
         _stateDelete.value = StateControllerDelete.Loading
         val response = repository.getUserDetails(id)
         if (response.isSuccessful && response.body()!!.status == "OK") {
