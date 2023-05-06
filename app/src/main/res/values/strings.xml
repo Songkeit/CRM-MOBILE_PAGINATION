@@ -5,4 +5,5 @@
     <string name="User_Data">Data</string>
     <string name="close" />
     <string name="open">open</string>
+    <string name="data">data</string>
 </resources>

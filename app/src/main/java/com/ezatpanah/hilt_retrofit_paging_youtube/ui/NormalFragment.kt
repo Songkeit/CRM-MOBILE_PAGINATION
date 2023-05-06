@@ -45,6 +45,8 @@ class NormalFragment : Fragment() {
     //var btnCheck: Boolean = false
     private var dataSearch: String = "null"
     private var dataDel: Boolean? = false
+    private var colorDel: Int? = Color.RED
+    private var textDel: String? = "ข้อมูลที่ถูกลบ"
 
 
     @Inject
@@ -64,6 +66,7 @@ class NormalFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         //click to intent
         lifecycle.coroutineScope.launchWhenCreated {
             viewModel.stateIntent.collect {
@@ -120,6 +123,10 @@ class NormalFragment : Fragment() {
                                             )
                                             val bundle = Bundle()
                                             bundle.putBoolean("dataDel", !(dataDel)!!)//
+                                            bundle.putInt("colorBtn", colorDel!!)//
+                                            bundle.putString("data", editText!!.text.toString())//
+                                            bundle.putString("textDel", textDel)//
+                                            bundle.putString("checkDataString", "NormalFragment")
                                             val dataToEmergency = NormalFragment()
                                             dataToEmergency.arguments = bundle
                                             fragmentManager?.beginTransaction()
@@ -150,17 +157,49 @@ class NormalFragment : Fragment() {
         editText = view.findViewById(R.id.editTextNormal)
         textInputLayOut = view.findViewById(R.id.textInputLayOutNormal)
         btnMode = view.findViewById(R.id.btn_mode_delete)
-        var args = this.arguments
+
+        val args = this.arguments
         dataSearch = args?.getString("data").toString()
-        var argsStateDel = this.arguments
+
+        val argsStateDel = this.arguments
         dataDel = argsStateDel?.getBoolean("dataDel") == dataDel
-        Log.i("q", "onViewCreated: $dataDel")
+
+        val argsStatColor = this.arguments
+        colorDel = argsStatColor?.getInt("colorBtn")
+
+        val argsStateText = this.arguments
+        textDel = argsStateText?.getString("textDel")
+
+        Log.i("co", "onViewCreated: $colorDel")
+        if (colorDel == null || textDel == null){
+            btnMode!!.text = "ข้อมูลที่ถูกลบ"
+            btnMode!!.setBackgroundColor(Color.RED)
+        }else{
+            btnMode!!.text = textDel
+            Log.i("color", "onViewCreated: $colorDel")
+            Log.i("text", "onViewCreated: $textDel")
+            colorDel?.let { btnMode!!.setBackgroundColor(it) }
+        }
+
         if (dataSearch.isNullOrEmpty()|| dataSearch =="null"){
             editText.text = null
         }else{
             editText.setText(dataSearch)
         }
         normalAdapter.stateIcon = dataDel
+
+
+        //btnMode!!.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_delete_24,0,0,0)
+
+//        if (dataDel!!){
+//            btnMode!!.text = "ข้อมูลที่ถูกลบ"
+//            btnMode!!.setBackgroundColor(Color.RED)
+//            btnMode!!.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_delete_24,0,0,0)
+//        }else{
+//            btnMode!!.text = "รายการข้อมูลรับเรื่อง"
+//            btnMode!!.setBackgroundColor(Color.CYAN)
+//            btnMode!!.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_arrow_back_ios_new_24,0,0,0)
+//        }
 
 
 
@@ -205,6 +244,8 @@ class NormalFragment : Fragment() {
                 val bundle = Bundle()
                 bundle.putString("data", editText!!.text.toString())//
                 bundle.putBoolean("dataDel", !(dataDel)!!)//
+                bundle.putInt("colorBtn", colorDel!!)//
+                bundle.putString("textDel", textDel)//
                 bundle.putString("checkDataString", "NormalFragment")
                 val dataToHome = NormalFragment()
                 dataToHome.arguments = bundle
@@ -214,9 +255,19 @@ class NormalFragment : Fragment() {
             }
             btnMode!!.setOnClickListener {
                 this@NormalFragment.dataDel = (!dataDel!!)
+                if (dataDel){
+                    colorDel = Color.RED
+                    textDel = "ข้อมูลที่ถูกลบ"
+                }else{
+                    colorDel = Color.BLUE
+                    textDel = "รายการข้อมูล"
+                }
+
                 Log.i("789", "runningProgram: $dataDel")
                 val bundle = Bundle()
                 bundle.putBoolean("dataDel", dataDel)//
+                bundle.putInt("colorBtn", colorDel!!)//
+                bundle.putString("textDel", textDel)//
                 bundle.putString("checkDataString", "NormalFragment")
                 val dataToHome = NormalFragment()
                 dataToHome.arguments = bundle
@@ -224,68 +275,7 @@ class NormalFragment : Fragment() {
                     ?.replace(R.id.fragment_container, dataToHome)
                     ?.commit()
 
-//                this@NormalFragment.btnCheck = !(btnCheck)
-//                viewModel.stateDel = btnCheck
-//                val bundle = Bundle()
-//                bundle.putBoolean("dataDel", btnCheck)//
-//                bundle.putString("checkDataString", "NormalFragment")
-//                val dataToHome = NormalFragment()
-//                dataToHome.arguments = bundle
-//                fragmentManager?.beginTransaction()
-//                    ?.replace(R.id.fragment_container, dataToHome)
-//                    ?.commit()
             }
-
-//            btnModeDelete.setOnClickListener {
-//                s = !(s)
-//               if (s){
-//                   viewModelStateDelete.setDelete(true)
-//               }
-////                if (stateDel!!){
-////                    ValueStateDel().stateDelBoo = true
-////                    Log.i("show", "runningProgram: true ${ValueStateDel().stateDelBoo}")
-////                }else{
-////                    ValueStateDel().stateDelBoo = false
-////
-////                    Log.i("show", "runningProgram: false ${ValueStateDel().stateDelBoo}")
-////                }
-////                var count = 0
-////                count +=1
-//                //ValueStateDel().stateDelBoo = count % 2 == 0
-// //               ValueStateDel().stateDelBoo = !(ValueStateDel().stateDelBoo)!!
-////                if (stateDel.stateDelBoo == true || stateDel.stateDelBoo == null) {
-//////                    value.stateDel = "1"
-////                    //preferManager.saveStateDelete("1")
-//                    val bundle = Bundle()
-//                    bundle.putString("data", editText!!.text.toString())//
-//                    bundle.putString("checkDataString", "NormalFragment")
-//                    val dataToHome = NormalFragment()
-//                    dataToHome.arguments = bundle
-//                    fragmentManager?.beginTransaction()
-//                        ?.replace(R.id.fragment_container, dataToHome)
-//                        ?.commit()
-////                } else {
-////                    //value.stateDel = "0"
-////                   // preferManager.saveStateDelete("0")
-////                    val bundle = Bundle()
-////                    bundle.putString("data", editText!!.text.toString())//
-////                    bundle.putString("checkDataString", "NormalFragment")
-////                    val dataToHome = NormalFragment()
-////                    dataToHome.arguments = bundle
-////                    fragmentManager?.beginTransaction()
-////                        ?.replace(R.id.fragment_container, dataToHome)
-////                        ?.commit()
-////                }
-////                if (stateDel){
-////                    viewModel.stateClickDelete = "0"
-////                    Log.i("btnDel", "runningProgram: click delete")
-////                }else{
-////                    viewModel.stateClickDelete = "1"
-////                    Log.i("btnDel", "runningProgram: click restore")
-////
-////                }
-//            }
-
 
             //click to intent
             normalAdapter.setOnItemClickListener {
