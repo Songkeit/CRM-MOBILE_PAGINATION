@@ -244,7 +244,11 @@ class NormalFragment : Fragment() {
                 val bundle = Bundle()
                 bundle.putString("data", editText!!.text.toString())//
                 bundle.putBoolean("dataDel", !(dataDel)!!)//
-                bundle.putInt("colorBtn", colorDel!!)//
+                if(colorDel == null){
+                    bundle.putInt("colorBtn", Color.RED)//
+                }else{
+                    bundle.putInt("colorBtn", colorDel!!)//
+                }
                 bundle.putString("textDel", textDel)//
                 bundle.putString("checkDataString", "NormalFragment")
                 val dataToHome = NormalFragment()
