@@ -1,5 +1,6 @@
 package com.ezatpanah.hilt_retrofit_paging_youtube.ui
 
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -31,11 +32,17 @@ import javax.inject.Inject
 class MainInformationFragment : Fragment() {
     //system
 
+    var stateIntentFrom:Boolean = true
+
     private val viewModel: MainInformationViewModel by viewModels()
 
     lateinit var binding: FragmentMainInformationBinding
     private var userId:String = "0"
     private var fromPageName = "empty"
+    private var stateDel:Boolean = true
+    private var dataIntent:String = "null"
+    private var colorBtn:Int = 0
+    private var textDel:String = "null"
     private var sendData: ApiInformationUser.Data = ApiInformationUser.Data()
     val TAG = "MovieDetailsFragment"
 
@@ -117,9 +124,18 @@ class MainInformationFragment : Fragment() {
         time!!.isEnabled = false
         var args = this.arguments
         var argsPageName = this.arguments
+        var argsDel = this.arguments
+        var argsDataIntent = this.arguments
+        var argsColorBtn = this.arguments
+        var argsTextDel = this.arguments
         userId = args!!.getString("data").toString()
 
         fromPageName = argsPageName?.getString("checkDataString").toString()
+        stateDel = argsDel?.getBoolean("dataDel") == true
+        dataIntent = argsDataIntent?.getString("dataIntent").toString()// search
+        colorBtn = argsColorBtn?.getInt("colorBtn")!!
+        textDel = argsTextDel?.getString("textDel").toString()
+
         if (userId != "null") {
             viewModel.loadDetailUser(userId!!.toInt()) //โหลดข้อมูลของแต่ละคน
             lifecycle.coroutineScope.launchWhenCreated {
@@ -228,6 +244,7 @@ class MainInformationFragment : Fragment() {
             val bundle = Bundle()
             if (fromPageName == "NormalFragment") {
                 val dataToNormal = NormalFragment()
+                bundle.putBoolean("dataDel", stateDel)//
                 dataToNormal.arguments = bundle
                 fragmentManager?.beginTransaction()
                     ?.replace(R.id.fragment_container, dataToNormal)?.commit()
@@ -308,6 +325,17 @@ class MainInformationFragment : Fragment() {
                             val bundle = Bundle()
                             if (fromPageName == "NormalFragment") {
                                 val dataToNormal = NormalFragment()
+                                bundle.putBoolean("dataDel", !stateDel)//
+                                bundle.putString("dataIntent", dataIntent)//
+                                bundle.putInt("colorBtn", colorBtn)
+                                if (!stateDel){
+                                    colorBtn = Color.RED
+                                    textDel = "ข้อมูลที่ถูกลบ"
+                                }else{
+                                    colorBtn = Color.BLUE
+                                    textDel = "รายการข้อมูล"
+                                }
+                                bundle.putString("textDel", textDel)//
                                 dataToNormal.arguments = bundle
                                 fragmentManager?.beginTransaction()
                                     ?.replace(R.id.fragment_container, dataToNormal)?.commit()
@@ -322,8 +350,6 @@ class MainInformationFragment : Fragment() {
                                 fragmentManager?.beginTransaction()
                                     ?.replace(R.id.fragment_container, dataToUnsave)?.commit()
                             }
-
-
                         }
                         is MainInformationViewModel.StateControllerUpdate.Error -> {
                             Toast(context).showCustomToast(

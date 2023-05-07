@@ -64,9 +64,9 @@ class NormalAdapter @Inject() constructor(
                 typeCalling.setTextColor(Color.parseColor(color))
                 message.text = item.summaryAgent
                 agent.text = item.agentimport
+                srcValue.text = item.srcFirstName
                 channal.text = serviceName
-                dst.text = item.dst
-                srcValue.text = item.src
+                dst.text = item.dstFirstName
                 dateTime.text = item.datebegin
                 if (stateIcon!!){
                     delete.setImageResource(R.drawable.baseline_restore_24)

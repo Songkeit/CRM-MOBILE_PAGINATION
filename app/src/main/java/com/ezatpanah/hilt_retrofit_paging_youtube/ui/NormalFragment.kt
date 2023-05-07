@@ -39,9 +39,6 @@ class NormalFragment : Fragment() {
     var textInputLayOut: TextInputLayout? = null
     var btnMode: Button? = null
 
-
-
-
     //var btnCheck: Boolean = false
     private var dataSearch: String = "null"
     private var dataDel: Boolean? = false
@@ -75,6 +72,21 @@ class NormalFragment : Fragment() {
                         val bundle = Bundle()
                         bundle.putString("data", it.id.toString())//
                         bundle.putString("checkDataString", "NormalFragment")
+                        bundle.putBoolean("dataDel", dataDel!!)
+                        bundle.putString("dataIntent", editText!!.text.toString())//
+                        if(colorDel == null){
+                            bundle.putInt("colorBtn", Color.RED)//
+                        }else{
+                            bundle.putInt("colorBtn", colorDel!!)//
+                        }
+                        if (dataDel!!){
+                            colorDel = Color.RED
+                            textDel = "ข้อมูลที่ถูกลบ"
+                        }else{
+                            colorDel = Color.BLUE
+                            textDel = "รายการข้อมูล"
+                        }
+                        bundle.putString("textDel", textDel)//
                         val dataToHome = MainInformationFragment()
                         dataToHome.arguments = bundle
                         fragmentManager?.beginTransaction()

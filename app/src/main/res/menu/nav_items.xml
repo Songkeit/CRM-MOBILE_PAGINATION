@@ -15,41 +15,41 @@
     <item
         android:id="@+id/nav_normal"
         android:checkable="true"
-        android:icon="@drawable/baseline_width_normal_24"
+        android:icon="@drawable/baseline_search_24"
         android:title="ค้นหาข้อมูล"
         />
     <item
         android:id="@+id/nav_emergency"
         android:checkable="true"
-        android:icon="@drawable/baseline_width_normal_24"
+        android:icon="@drawable/baseline_person_search_24"
         android:title="ค้นหาการรับเรื่องฉุกเฉินจริง" />
     <item
         android:id="@+id/nav_concution_supervisor"
         android:checkable="true"
-        android:icon="@drawable/baseline_width_normal_24"
+        android:icon="@drawable/baseline_supervisor_account_24"
         android:title="สรุปงาน SUPERVISOR"
         />
     <item
         android:id="@+id/nav_search_concution_supervisor"
         android:checkable="true"
-        android:icon="@drawable/baseline_width_normal_24"
+        android:icon="@drawable/baseline_document_scanner_24"
         android:title="ค้นหาสรุปงาน SUPERVISOR" />
     <item
         android:id="@+id/nav_problem"
         android:checkable="true"
-        android:icon="@drawable/baseline_width_normal_24"
+        android:icon="@drawable/baseline_report_problem_24"
         android:title="ปัญหาทางเทคนิค"
         />
     <item
         android:id="@+id/nav_manage_kiosk"
         android:checkable="true"
-        android:icon="@drawable/baseline_width_normal_24"
+        android:icon="@drawable/baseline_monitor_24"
         android:title="จัดการตู้ KIOSK" />
 
     <item
         android:id="@+id/nav_log_out"
         android:checkable="true"
-        android:icon="@drawable/baseline_width_normal_24"
+        android:icon="@drawable/baseline_logout_24"
         android:title="Logout" />
 </menu>
 
