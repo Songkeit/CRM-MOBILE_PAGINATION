@@ -129,7 +129,7 @@ class NormalFragment : Fragment() {
                                     when (it) {
                                         is NormalViewModel.StateController.Success -> {
                                             Toast(context).showCustomToast(
-                                                "ลบข้อมูลสำเร็จ",
+                                                "ทำรายการสำเร็จ",
                                                 this@NormalFragment,
                                                 R.color.success
                                             )

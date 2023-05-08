@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         var drawerLayout:DrawerLayout = findViewById(R.id.drawerLayOut)
         val imageMenu: ImageView = findViewById(R.id.imageSort)
         var navView: NavigationView = findViewById(R.id.navDrawerId)
+        var textTitle: TextView = findViewById(R.id.textTitle)
         navView.itemIconTintList = null
         imageMenu.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
@@ -37,7 +38,6 @@ class MainActivity : AppCompatActivity() {
         navView.setNavigationItemSelectedListener { menuItem ->
             menuItem.isChecked = true
             drawerLayout.closeDrawers()
-            var textTitle: TextView = findViewById(R.id.textTitle)
             when (menuItem.itemId) {
                 R.id.nav_home -> {
                     textTitle.text = menuItem.title
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
                             applicationContext,
                             android.R.string.yes, Toast.LENGTH_SHORT
                         ).show()
-                        var intent = Intent(this, ChooseService::class.java)
+                        var intent = Intent(this, LoginPage::class.java)
                         startActivity(intent)
                     }
 
@@ -93,14 +93,15 @@ class MainActivity : AppCompatActivity() {
                     }
                     builder.show()
                 }
-
             }
 
             true
         }
+        textTitle.text = "บันทึกข้อมูล"
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, HomeFragment())
             .commit()
+
         btnContact.setOnClickListener {
             val fm = supportFragmentManager
             val myFragment = ContactDialog()

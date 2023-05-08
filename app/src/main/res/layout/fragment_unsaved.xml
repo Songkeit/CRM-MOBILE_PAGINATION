@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:gravity="right"
         android:paddingRight="60dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         >
 
     </LinearLayout>
@@ -40,15 +40,18 @@
             android:backgroundTint="@color/white"
             android:shadowColor="#000"
             android:shadowRadius="50"
-            app:cardCornerRadius="40dp">
+            app:cardCornerRadius="10dp"
+            app:cardElevation="8dp"
+            app:cardMaxElevation="10dp"
+            app:cardPreventCornerOverlap="true"
+          >
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="528dp"
+                android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
                 android:background="@android:color/white"
-                android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="parent"
@@ -65,8 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_gravity="center"
-                />
+                android:layout_gravity="center" />
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
 
