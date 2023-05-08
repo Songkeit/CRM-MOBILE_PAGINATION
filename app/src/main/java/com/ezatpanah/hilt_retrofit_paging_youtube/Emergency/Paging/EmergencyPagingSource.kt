@@ -15,7 +15,7 @@ class EmergencyPagingSource(
         return try {
             // add page +=1
             val currentPage = params.key ?: 1
-            val response = repository.getEmergency(currentPage,search)
+            val response = repository.getEmergency(currentPage, search)
             val data = response.body()!!.data
 
             val responseData = mutableListOf<RequestCommonApi.Data>()
@@ -25,7 +25,7 @@ class EmergencyPagingSource(
                 data = responseData,
                 prevKey = if (currentPage == 1) null else -1,
                 nextKey = if (data.isEmpty()) null else currentPage.plus(1)
-                    //currentPage.plus(1)
+                //currentPage.plus(1)
             )
         } catch (e: Exception) {
             LoadResult.Error(e)
@@ -34,7 +34,6 @@ class EmergencyPagingSource(
         }
 
     }
-
 
     override fun getRefreshKey(state: PagingState<Int, RequestCommonApi.Data>): Int? {
         return null

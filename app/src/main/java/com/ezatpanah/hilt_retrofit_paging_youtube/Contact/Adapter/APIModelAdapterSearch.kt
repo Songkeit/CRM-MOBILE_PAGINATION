@@ -11,12 +11,8 @@ import com.ezatpanah.hilt_retrofit_paging_youtube.Contact.Model.ContactSearchMod
 
 class APIModelAdapterSearch(
     var resultsSearch: ArrayList<ContactSearchModel.Data>?
-
 ) :
     RecyclerView.Adapter<APIModelAdapterSearch.ViewHolder>() {
-
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
         LayoutInflater.from(parent.context).inflate(
             R.layout.card_dialog_list_search,

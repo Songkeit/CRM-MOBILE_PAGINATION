@@ -32,9 +32,6 @@ class ContactVIewModel @Inject constructor(
     }
 
     lateinit var apiModelAdapterProvince: APIModelAdapterSearchProvince
-    fun observerLiveData(): MutableLiveData<String?> {
-        return liveData
-    }
 
 
     fun getDataFromApiProvince(search: String) = viewModelScope.launch {
@@ -50,35 +47,6 @@ class ContactVIewModel @Inject constructor(
                 Log.i("empty province", "onResponse: not have data")
                 liveData.postValue("FAIL")
             }
-
-
-//        ApiService.endpointprovince.contactProvince(
-//            pagnition,
-//            search,
-//            "1",
-//            "200"
-//        ).enqueue(object : Callback<ProvinceModel> {
-//            override fun onResponse(call: Call<ProvinceModel>, response: Response<ProvinceModel>) {
-//                if (response.isSuccessful){
-//                    _state.value = StateController.Success("OK")
-//                    liveData.postValue("OK")
-//                    showResult(response.body()!!)
-//                }else{
-//                    _state.value = StateController.Empty
-//                    Log.i("empty province", "onResponse: not have data")
-//                    liveData.postValue("FAIL")
-//
-//
-//                }
-//            }
-//            override fun onFailure(call: Call<ProvinceModel>, t: Throwable) {
-//                _state.value = StateController.Error("FAIL")
-//                liveData.postValue("FAIL")
-//
-//
-//            }
-//
-//        })
         }
     }
 

@@ -30,10 +30,6 @@ class ContactDialog() : DialogFragment() {
 
     private val viewModelProvince: ContactVIewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater,

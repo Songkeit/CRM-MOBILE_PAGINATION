@@ -9,8 +9,7 @@ import com.ezatpanah.hilt_retrofit_paging_youtube.ChooseService.UI.ChooseService
 import com.ezatpanah.hilt_retrofit_paging_youtube.R
 
 class LoginPage : AppCompatActivity() {
-    val username = "test"
-    val password = "test123"
+
     var inputUsername: EditText? = null
     var inputPassword: EditText? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,13 +22,7 @@ class LoginPage : AppCompatActivity() {
             val intent = Intent(this, ChooseService::class.java)
             startActivity(intent)
         }
-//        if (inputUsername.toString() == username && inputPassword.toString() == password) {
-//            Log.i("user", "onCreate: $inputUsername , $password")
-//            btnLogin.setOnClickListener {
-//                val intent = Intent(this, ChooseService::class.java)
-//                startActivity(intent)
-//            }
-//        }
+
 
     }
 }

@@ -23,9 +23,9 @@ class APIModelAdapterSearchProvince(
 ) :
     RecyclerView.Adapter<APIModelAdapterSearchProvince.ViewHolder>() {
 
-    private lateinit var displayName:TextView
-    private lateinit var videoPhone:TextView
-    private lateinit var numberPhone:TextView
+    private lateinit var displayName: TextView
+    private lateinit var videoPhone: TextView
+    private lateinit var numberPhone: TextView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
         LayoutInflater.from(parent.context).inflate(
             R.layout.card_dialog_list,
@@ -41,37 +41,45 @@ class APIModelAdapterSearchProvince(
             var phoneNumber = resultProvince.phonenumber
             var displayName = resultProvince.displayName
             var extension = resultProvince.extension
-            if (resultProvince.phonenumber!!.isEmpty()){
+            if (resultProvince.phonenumber!!.isEmpty()) {
                 phoneNumber = "-"
             }
-            if (resultProvince.displayName!!.isEmpty()){
+            if (resultProvince.displayName!!.isEmpty()) {
                 displayName = "-"
             }
-            if (resultProvince.extension!!.isEmpty()){
+            if (resultProvince.extension!!.isEmpty()) {
                 extension = "-"
             }
-//            holder.view.displayName.text = displayName
-//            holder.view.video_phone.text = extension
-//            holder.view.number_phone.text = phoneNumber
             holder.view.findViewById<TextView>(R.id.displayName).text = displayName.toString()
             holder.view.findViewById<TextView>(R.id.video_phone).text = extension.toString()
             holder.view.findViewById<TextView>(R.id.number_phone).text = phoneNumber.toString()
 
         }
-        holder.view.findViewById<ImageView>(R.id.copy_video_phone).setOnClickListener{
-            copyTextToClipboard(holder.itemView.context,holder.view.findViewById<TextView>(R.id.video_phone).text.toString())
-            Log.i("copy", "onBindViewHolder: ${holder.view.findViewById<TextView>(R.id.video_phone).text}")
-            Toast.makeText(holder.itemView.context,"Clipboard",Toast.LENGTH_SHORT).show()
+        holder.view.findViewById<ImageView>(R.id.copy_video_phone).setOnClickListener {
+            copyTextToClipboard(
+                holder.itemView.context,
+                holder.view.findViewById<TextView>(R.id.video_phone).text.toString()
+            )
+            Log.i(
+                "copy",
+                "onBindViewHolder: ${holder.view.findViewById<TextView>(R.id.video_phone).text}"
+            )
+            Toast.makeText(holder.itemView.context, "Clipboard", Toast.LENGTH_SHORT).show()
         }
-        holder.view.findViewById<ImageView>(R.id.copy_number_phone).setOnClickListener{
-            copyTextToClipboard(holder.itemView.context,holder.view.findViewById<TextView>(R.id.number_phone).text.toString())
-            Log.i("copy", "onBindViewHolder: ${holder.view.findViewById<TextView>(R.id.number_phone).text}")
-            Toast.makeText(holder.itemView.context,"Clipboard",Toast.LENGTH_SHORT).show()
+        holder.view.findViewById<ImageView>(R.id.copy_number_phone).setOnClickListener {
+            copyTextToClipboard(
+                holder.itemView.context,
+                holder.view.findViewById<TextView>(R.id.number_phone).text.toString()
+            )
+            Log.i(
+                "copy",
+                "onBindViewHolder: ${holder.view.findViewById<TextView>(R.id.number_phone).text}"
+            )
+            Toast.makeText(holder.itemView.context, "Clipboard", Toast.LENGTH_SHORT).show()
 
         }
 
     }
-
 
     override fun getItemCount(): Int {
         return resultsProvince.size
@@ -84,11 +92,10 @@ class APIModelAdapterSearchProvince(
         this.resultsProvince.addAll(data)
         this.notifyDataSetChanged()
     }
+
     fun copyTextToClipboard(context: Context, text: String) {
         val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("text", text)
         clipboard.setPrimaryClip(clip)
     }
-
-
 }

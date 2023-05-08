@@ -12,16 +12,11 @@ import com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.Model.ApiInformation
 import com.ezatpanah.hilt_retrofit_paging_youtube.Normal.Model.DeleteData
 import com.ezatpanah.hilt_retrofit_paging_youtube.Unsaved.Model.PetitionUnSaveModel
 import com.ezatpanah.hilt_retrofit_paging_youtube.response.RequestCommonApi
-import com.ezatpanah.hilt_retrofit_paging_youtube.ui.*
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
 interface ApiServices {
-
-    //    https://api.themoviedb.org/3/movie/550?api_key=***
-    //    https://api.themoviedb.org/3/movie/popular?api_key=***
-    //    https://api.themoviedb.org/3/
 
     @GET("petitionEmergency?")
     suspend fun getEmergency(
@@ -114,14 +109,6 @@ interface ApiServices {
     @GET("https://dev-api.ttrs.in.th/v3/petitions/services/VRS?all=true")
     suspend fun typeStory(): Response<TypeStoryModel>
 
-    //dropDown
-    @GET("https://dev-api.ttrs.in.th/v3/petitions/services/VRS?all=true")
-    fun typeStoryAdapter(): Call<TypeStoryModel>
-
-
-
-    @GET("petition/{id}")
-    fun getPetitionId(@Path("id") id: String): Response<ApiInformationUser>
 
     //unsaved
     @GET("https://dev-apiicrm.ttrs.in.th/petitionUnsave?agentimport=agenttest01&service_name=vrs")

@@ -201,34 +201,7 @@ class NormalFragment : Fragment() {
             editText.setText(dataSearch)
         }
         normalAdapter.stateIcon = dataDel
-
-
-        //btnMode!!.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_delete_24,0,0,0)
-
-//        if (dataDel!!){
-//            btnMode!!.text = "ข้อมูลที่ถูกลบ"
-//            btnMode!!.setBackgroundColor(Color.RED)
-//            btnMode!!.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_delete_24,0,0,0)
-//        }else{
-//            btnMode!!.text = "รายการข้อมูลรับเรื่อง"
-//            btnMode!!.setBackgroundColor(Color.CYAN)
-//            btnMode!!.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_arrow_back_ios_new_24,0,0,0)
-//        }
-
-
-
-        //btnCheck = argsStateDel?.getBoolean("dataDel") == true
         runningProgram(dataSearch,dataDel)
-
-
-//        if (stateDel){
-//            viewModelStateDelete.setDelete(true)
-//        }else{
-//            viewModelStateDelete.setDelete(false)
-//        }
-
-
-
     }
 
     private fun runningProgram(dataSearch: String?, dataDel: Boolean?) {
@@ -240,12 +213,6 @@ class NormalFragment : Fragment() {
         if (dataDel != null) {
             viewModel.stateDel = dataDel
         }
-
-//        if (btnCheck == "null"){
-//            viewModel.stateDel = "0"
-//        }else{
-//            viewModel.stateDel = "1"
-//        }
 
         binding.apply {
             lifecycleScope.launchWhenCreated {
@@ -307,18 +274,6 @@ class NormalFragment : Fragment() {
                 viewModel.getDataCheckDelete(dataDelete!!)
             }
 
-//            textInputLayOut!!.setEndIconOnClickListener {
-////                //viewModel.search = editText!!.text.toString()
-////                viewModel.search = editText!!.text.toString()
-////                runningProgram()
-//                binding.apply {
-//                    lifecycleScope.launchWhenCreated {
-//                        viewModel.normalList.collect {
-//                            normalAdapter.submitData(it)
-//                        }
-//                    }
-//                }
-//            }
 
             // refresh when slide end
             lifecycleScope.launchWhenCreated {

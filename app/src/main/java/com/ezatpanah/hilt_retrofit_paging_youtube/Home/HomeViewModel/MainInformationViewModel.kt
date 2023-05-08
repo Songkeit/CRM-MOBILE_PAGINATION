@@ -1,4 +1,4 @@
-package com.ezatpanah.hilt_retrofit_paging_youtube.Home
+package com.ezatpanah.hilt_retrofit_paging_youtube.Home.HomeViewModel
 
 
 import androidx.lifecycle.MutableLiveData

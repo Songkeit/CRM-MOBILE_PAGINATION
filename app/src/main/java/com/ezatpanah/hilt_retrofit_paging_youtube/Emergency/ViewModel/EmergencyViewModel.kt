@@ -1,4 +1,4 @@
-package com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.MovieViewModel
+package com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.ViewModel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -64,7 +64,9 @@ class EmergencyViewModel @Inject constructor(private val repository: ApiReposito
 
 
     }
-    private val _statetypeStory = MutableStateFlow<StateControllerTypeStory>(StateControllerTypeStory.Empty)
+    private val _statetypeStory = MutableStateFlow<StateControllerTypeStory>(
+        StateControllerTypeStory.Empty
+    )
     val statetypeStory: StateFlow<StateControllerTypeStory> = _statetypeStory
     sealed class StateControllerTypeStory{
         object Loading : StateControllerTypeStory()
@@ -73,7 +75,9 @@ class EmergencyViewModel @Inject constructor(private val repository: ApiReposito
         data class Success(val dataList: TypeStoryModel?) : StateControllerTypeStory()
         data class Data(val data: DeleteData?) : StateControllerTypeStory()
     }
-    private val _stateservicelist = MutableStateFlow<StateControllerServiceList>(StateControllerServiceList.Empty)
+    private val _stateservicelist = MutableStateFlow<StateControllerServiceList>(
+        StateControllerServiceList.Empty
+    )
     val stateservicelist: StateFlow<StateControllerServiceList> = _stateservicelist
     sealed class StateControllerServiceList {
         object Loading : StateControllerServiceList()
@@ -126,16 +130,6 @@ class EmergencyViewModel @Inject constructor(private val repository: ApiReposito
             _state.value = StateController.Error("FAIL")
 
         }
-    }
-    fun getMovieDetail(id: Int) = viewModelScope.launch {// see data
-        loading.postValue(true)
-        val response = repository.getUserDetails(id)
-        if (response.isSuccessful && response.body()!!.status == "OK") {
-            _state.value = StateController.Success("OK")
-        }else{
-            _state.value = StateController.Error("Error")
-        }
-        loading.postValue(false)
     }
 
     fun getDataCheckIntent(id: Int) = viewModelScope.launch {// see data

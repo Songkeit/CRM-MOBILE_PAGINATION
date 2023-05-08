@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ezatpanah.hilt_retrofit_paging_youtube.Component.showCustomToast
 import com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.Adapter.LoadMoreAdapter
 import com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.Adapter.EmergencyAdapter
-import com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.MovieViewModel.EmergencyViewModel
+import com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.ViewModel.EmergencyViewModel
 import com.ezatpanah.hilt_retrofit_paging_youtube.Normal.Model.DeleteData
 import com.ezatpanah.hilt_retrofit_paging_youtube.R
 import com.ezatpanah.hilt_retrofit_paging_youtube.databinding.FragmentEmergencyBinding
@@ -43,8 +43,6 @@ class EmergencyFragment : Fragment() { // test main
     @Inject
     lateinit var emergencyAdapter: EmergencyAdapter
     private val viewModel: EmergencyViewModel by viewModels()
-    // send data
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -158,14 +156,7 @@ class EmergencyFragment : Fragment() { // test main
         }else{
             editText.setText(dataSearch)
         }
-
         runningProgram(dataSearch)
-//        textInputLayOut!!.setEndIconOnClickListener {
-//            viewModel.search = editText!!.text.toString()
-//            runningProgram()
-//        }
-        // it will set data to loop recycleView
-
     }
 
     private fun runningProgram(dataSearch: String?) {

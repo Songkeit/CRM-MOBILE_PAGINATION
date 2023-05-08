@@ -26,15 +26,6 @@ class SharePreferenceManager @Inject constructor(@ApplicationContext context: Co
         editor.apply()
 
     }
-    fun saveStateDelete(state: String?){
-        var editor = prefsStateDelete.edit()
-////        editor.putString(USER_ITEM,items)
-//        val jsonString = gson.toJson(state)
-//        Log.i("json", "savePreference: $jsonString")
-        editor.putString("userItemsDelete",state)
-        editor.apply()
-
-    }
 
     fun savePreferenceServiceList(items: ServiceList?){
         Log.i("itemssss", "savePreference: $items")
@@ -53,10 +44,5 @@ class SharePreferenceManager @Inject constructor(@ApplicationContext context: Co
     fun getPreferenceTypeStory(): String? {
         return prefsTypeStory.getString("userItems",null)
     }
-
-    fun getStateDelete(): String? {
-        return prefsStateDelete.getString("userItemsDelete",null)
-    }
-
 
 }

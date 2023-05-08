@@ -29,8 +29,6 @@ class UnsavedAdapter @Inject() constructor(
 
     var typeStory = preferManager.getPreferenceTypeStory()
     var typeService = preferManager.getPreferenceService()
-    val typeName = Gson().fromJson(typeStory, TypeStoryModel::class.java)
-    val serviceList = Gson().fromJson(typeService, ServiceList::class.java)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -48,25 +46,11 @@ class UnsavedAdapter @Inject() constructor(
 
         @SuppressLint("SetTextI18n")
         fun bind(item: PetitionUnSaveModel.Agenttest01) {
-            var messageTypeStatus = item.messageTypeStatus // service radio buttom
-            var messageTypeId = item.messageTypeId // id dropdown
-            var serviceId = item.srctype // id dropdown
-
-            //var (displayName,color,serviceName) = getName(messageTypeStatus, messageTypeId,serviceId)
             binding.apply {
                 tvPhone.text = item.src
                 tvPhone.setTextColor(Color.parseColor("#4CAE50"))
                 tvTypePhone.text = item.serviceName
                 tvDate.text = item.datebegin
-//                typeCalling.text = displayName
-//                typeCalling.setTextColor(Color.parseColor(color))
-//                message.text = item.summaryAgent
-//                agent.text = item.agentimport
-//                channal.text = serviceName
-//                dst.text = item.dst
-//                srcValue.text = item.src
-//                dateTime.text = item.datebegin
-
                 cardOnClick.setOnClickListener {
                     onItemClickListener?.let {
                         it(item)
@@ -76,74 +60,14 @@ class UnsavedAdapter @Inject() constructor(
         }
     }
 
-    fun getName(messageTypeStatus: Int?, messageTypeId: Int?, serviceId: Int?): Triple<String?, String?,String?> {
-        var text:String? = "(ไม่ได้ระบุ)"
-        var color:String? = "#00FF00"
-        var serviceName:String? = "123"
-        when (messageTypeStatus) {
-            0 -> {
-                val typeMaxsize = typeName.data!!.incompleteType.size
-                for (i in 0 until typeMaxsize) {
-                    val typeId = typeName.data!!.incompleteType[i].typeId
-                    if (typeId == messageTypeId.toString()) {
-                        text = typeName.data!!.incompleteType[i].typeText.toString()
-                        color = "#FD9701"
-                    }
-                }
-            }
-            1 -> {
-                val typeMaxsize = typeName.data!!.completeType.size
-                for (i in 0 until typeMaxsize) {
-                    val typeId = typeName.data!!.completeType[i].typeId
-                    if (typeId == messageTypeId.toString()) {
-                        text = typeName.data!!.completeType[i].typeText.toString()
-                        color = "#00FF00"
-                    }
-                }
-            }
-            2 -> {
-                val typeMaxsize = typeName.data!!.noserviceType.size
-                for (i in 0 until typeMaxsize) {
-                    val typeId = typeName.data!!.noserviceType[i].typeId
-                    if (typeId == messageTypeId.toString()) {
-                        //text = typeName.data!!.noserviceType[i].typeText.toString()
-                        text = typeName.data!!.noserviceType[i].typeText.toString()
-                        color = "#FF0000"
-                    }
-                }
-            }
-        }
-        val typeMaxService = serviceList.data.size
-        for (i in 0 until typeMaxService){
-            val serviceIdList = serviceList.data[i].id
-            if (serviceId == serviceIdList){
-                serviceName = serviceList.data[i].name
-            }
-        }
-//        val typeMaxService = serviceList.data.size
-//        for (i in 0 until typeMaxService) {
-//            val serviceIdList = serviceList.data[i].id
-//            if (serviceId == serviceIdList) {
-//                serviceName = serviceList.data[i].name.toString()
-//
-//            }
-//        }
-        Log.i("service name", "getName: $serviceName")
-        return Triple(text,color,serviceName)
-    }
-
 
     private var onItemClickListener: ((PetitionUnSaveModel.Agenttest01) -> Unit)? = null
 
-    private var onItemClickListenerDeleteEmergency: ((PetitionUnSaveModel.Agenttest01) -> Unit)? = null
 
     fun setOnItemClickListener(listener: (PetitionUnSaveModel.Agenttest01) -> Unit) {
         onItemClickListener = listener
     }
 
-    fun setOnItemClickListenerDeleteEmergency(listener: (PetitionUnSaveModel.Agenttest01) -> Unit) {
-        onItemClickListenerDeleteEmergency = listener
-    }
 
     companion object {
         val differCallback = object : DiffUtil.ItemCallback<PetitionUnSaveModel.Agenttest01>() {

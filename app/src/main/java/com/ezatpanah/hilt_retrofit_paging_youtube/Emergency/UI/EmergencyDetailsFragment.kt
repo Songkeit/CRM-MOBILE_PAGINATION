@@ -14,7 +14,7 @@ import androidx.lifecycle.coroutineScope
 import androidx.navigation.fragment.navArgs
 import com.ezatpanah.hilt_retrofit_paging_youtube.Component.showCustomToast
 import com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.Model.ApiInformationUser
-import com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.MovieViewModel.EmergencyViewModel
+import com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.ViewModel.EmergencyViewModel
 import com.ezatpanah.hilt_retrofit_paging_youtube.Home.Model.KioskList
 import com.ezatpanah.hilt_retrofit_paging_youtube.Home.Model.ServiceList
 import com.ezatpanah.hilt_retrofit_paging_youtube.Home.Model.TypeStoryModel
@@ -27,7 +27,7 @@ class EmergencyDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentEmergencyDetailesBinding
     private var movieId = 0
-    private val args:EmergencyDetailsFragmentArgs by navArgs()
+    private val args: EmergencyDetailsFragmentArgs by navArgs()
     private val viewModel: EmergencyViewModel by viewModels()
     private lateinit var hideRadio: LinearLayout
     private lateinit var radio_complete: RadioButton
@@ -195,6 +195,7 @@ class EmergencyDetailsFragment : Fragment() {
             }
         }
     }
+
     private fun displayKioakDropDown() {
         getDataServiceTypeDropDown()
 
@@ -252,6 +253,7 @@ class EmergencyDetailsFragment : Fragment() {
                 sendData.logtype = itemsTypeFunnel[itemSelected]
             }
     }
+
     private fun getDataServiceTypeDropDown() { //ช่องทางการติดต่อ
         Log.i("dataLIst", "getDataServiceTypeDropDown: part1")
 
@@ -278,6 +280,7 @@ class EmergencyDetailsFragment : Fragment() {
             }
         }
     }
+
     private fun appendServiceTypeInListDropDown(data: ServiceList) {
         listServiceTypeDropDown.clear()
         listSerivceTypeMapOfDropDown.clear()
@@ -291,6 +294,7 @@ class EmergencyDetailsFragment : Fragment() {
             idCallTypeMapOfDropDown[data.data[i].name.toString()] = data.data[i].id.toString()
         }
     }
+
     @SuppressLint("SetTextI18n")
     private fun dropDownServiceTypeList() {
         var adapterServiceType: ArrayAdapter<String>? =
@@ -336,6 +340,7 @@ class EmergencyDetailsFragment : Fragment() {
                 }
             }
     }
+
     private fun getDataKioskDropDown() { // when user select kiosk id 3
         viewModel.kioskDropDown()
         lifecycle.coroutineScope.launchWhenCreated {
@@ -357,6 +362,7 @@ class EmergencyDetailsFragment : Fragment() {
             }
         }
     }
+
     private fun dropDownKioskList() {
         var adapterKiosk: ArrayAdapter<String>? =
             context?.let { ArrayAdapter(it, R.layout.list_items, listKioskDropDown) }
@@ -378,6 +384,7 @@ class EmergencyDetailsFragment : Fragment() {
                 Toast.makeText(context, itemSelectId.toString(), Toast.LENGTH_SHORT).show()
             }
     }
+
     private fun appendKioskInListDropDown(data: KioskList) {
         listKioskDropDown.clear()
         listKioskMapOfDropDown.clear()
@@ -389,6 +396,7 @@ class EmergencyDetailsFragment : Fragment() {
             listKioskMapOfDropDown[kioskText] = kioskId // ["ชื่อ","KIOSK123"]
         }
     }
+
     // readio button
     private fun selectRadioButton(response: ApiInformationUser.Data) {
         var SERVICE: Int? = null
@@ -432,6 +440,7 @@ class EmergencyDetailsFragment : Fragment() {
         getDataDropDown(SERVICE!!, response.messageTypeId!!)
 
     }
+
     fun getDataDropDown(service: Int, message_id: Int?) {// call service
         viewModel.typeStory()
         lifecycle.coroutineScope.launchWhenCreated {
@@ -450,6 +459,7 @@ class EmergencyDetailsFragment : Fragment() {
             }
         }
     }
+
     private fun forLopingListDropDown(results: TypeStoryModel, service: Int) {
         val TAG = "Display"
         spn!!.setSelection(0)
@@ -493,6 +503,7 @@ class EmergencyDetailsFragment : Fragment() {
             }
         }
     }
+
     private fun dropDownList(messageTypeId: Int?) { // ตัวกด list drop down
         Log.i("test9874561231", "dropDownList: $listMapOfDropDown")
         val adapterSpinner: ArrayAdapter<String>? =
@@ -535,6 +546,7 @@ class EmergencyDetailsFragment : Fragment() {
             }
         }
     }
+
     private fun findPositionOfMapListOfDropDown(messageTypeId: Int): Int {
         var index: Int? = null
         listMapOfDropDown.forEach { item ->

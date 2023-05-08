@@ -28,13 +28,6 @@ class ContactDialogSearch() : DialogFragment() {
 
     private val viewModelSearch: ContactSearchViewModel by viewModels()
 
-
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,7 +40,8 @@ class ContactDialogSearch() : DialogFragment() {
         var recycleViewSearch: RecyclerView =
             rootView.findViewById(R.id.recyclerViewProvinceSearch)
         var progressBarDestination = rootView.findViewById<ProgressBar>(R.id.progressBarDestination)
-        var message_empty_destination = rootView.findViewById<TextView>(R.id.message_empty_destination)
+        var message_empty_destination =
+            rootView.findViewById<TextView>(R.id.message_empty_destination)
         textInputLayOut = rootView.findViewById(R.id.textInputLayOutProvinceSearch)
 
         closeBtn.setOnClickListener {
@@ -164,7 +158,7 @@ class ContactDialogSearch() : DialogFragment() {
                             }
                         }
                     }
-                }else{
+                } else {
 
                     APIModelAdapterAgency = APIModelAdapterAgency(null)
                     recycleViewSearch.apply {

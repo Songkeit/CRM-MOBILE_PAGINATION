@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.coroutineScope
-import com.ezatpanah.hilt_retrofit_paging_youtube.ChooseService.ChooseServiceViewModel
+import com.ezatpanah.hilt_retrofit_paging_youtube.ChooseService.ViewModel.ChooseServiceViewModel
 import com.ezatpanah.hilt_retrofit_paging_youtube.R
 import com.ezatpanah.hilt_retrofit_paging_youtube.MainActivity
 import com.ezatpanah.hilt_retrofit_paging_youtube.ChooseService.Model.SeatsModelApi

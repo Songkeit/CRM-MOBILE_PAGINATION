@@ -61,35 +61,6 @@ class ContactSearchViewModel @Inject constructor(
         }else{
             _state.value = StateController.Empty
         }
-//        ApiService.endpointagencysearch.searchAgency(
-//            search,
-//            "100"
-//        ).enqueue(object : retrofit2.Callback<ProvinceModel> {
-//            override fun onResponse(
-//                call: Call<ProvinceModel>,
-//                response: Response<ProvinceModel>
-//            ) {
-//                if (response.isSuccessful) {
-//                    if (response.body()!!.data.isNotEmpty()) {
-//                        Log.i("vdosuc", "onResponse: video suc")
-//                        _state.value = StateController.Success("OK")
-//                        showResultAgency(response.body()!!)
-//                    } else {
-//                        _state.value = StateController.Empty
-//                    }
-//
-//                } else {
-//                    _state.value = StateController.Empty
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<ProvinceModel>, t: Throwable) {
-//                _state.value = StateController.Empty
-//
-//            }
-//
-//
-//        })
     }
 
     private fun showResult(results: ContactSearchModel) {

@@ -1,4 +1,4 @@
-package com.ezatpanah.hilt_retrofit_paging_youtube.ChooseService
+package com.ezatpanah.hilt_retrofit_paging_youtube.ChooseService.ViewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

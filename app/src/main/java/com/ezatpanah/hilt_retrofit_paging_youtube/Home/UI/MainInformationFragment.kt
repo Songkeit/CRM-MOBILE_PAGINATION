@@ -18,7 +18,7 @@ import com.ezatpanah.hilt_retrofit_paging_youtube.Component.showCustomToast
 import com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.Model.ApiInformationUser
 import com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.UI.EmergencyFragment
 import com.ezatpanah.hilt_retrofit_paging_youtube.Home.Model.CreateUser
-import com.ezatpanah.hilt_retrofit_paging_youtube.Home.MainInformationViewModel
+import com.ezatpanah.hilt_retrofit_paging_youtube.Home.HomeViewModel.MainInformationViewModel
 import com.ezatpanah.hilt_retrofit_paging_youtube.Home.Model.KioskList
 import com.ezatpanah.hilt_retrofit_paging_youtube.Home.Model.ServiceList
 import com.ezatpanah.hilt_retrofit_paging_youtube.Home.Model.TypeStoryModel
@@ -34,9 +34,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainInformationFragment : Fragment() {
-    //system
-
-    var stateIntentFrom:Boolean = true
 
     private val viewModel: MainInformationViewModel by viewModels()
 
@@ -72,7 +69,6 @@ class MainInformationFragment : Fragment() {
     private val itemsTypeFunnel =
         mutableMapOf("Normal" to "NORMAL", "Emergency" to "EMG")
 
-    // private var sendData: EmergencyDetailsResponse.Data = EmergencyDetailsResponse.Data()
     var resultInformationCreate = CreateUser.Data()
 
     //spn
@@ -92,7 +88,6 @@ class MainInformationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
 
         binding = FragmentMainInformationBinding.inflate(inflater, container, false)
         activity?.fragmentManager?.popBackStack()

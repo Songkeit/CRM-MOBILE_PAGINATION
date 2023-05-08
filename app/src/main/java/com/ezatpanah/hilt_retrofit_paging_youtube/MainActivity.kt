@@ -66,13 +66,10 @@ class MainActivity : AppCompatActivity() {
                         .replace(R.id.fragment_container, NormalFragment())
                         .commit()
                 }
-                R.id.nav_concution_supervisor -> {
-                    textTitle.text = menuItem.title
-                    Log.i("link", "onCreate: super visorpage")
-//                    supportFragmentManager.beginTransaction()
-//                        .replace(R.id.fragment_container, NormalFragment())
-//                        .commit()
-                }
+//                R.id.nav_concution_supervisor -> {
+//                    textTitle.text = menuItem.title
+//
+//                }
                 R.id.nav_log_out -> {
                     Log.i("logout", "onCreate: logout now!!")
                     val builder = AlertDialog.Builder(this)

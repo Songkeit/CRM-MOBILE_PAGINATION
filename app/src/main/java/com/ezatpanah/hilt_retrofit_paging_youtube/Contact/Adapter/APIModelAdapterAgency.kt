@@ -14,9 +14,6 @@ class APIModelAdapterAgency(
 
 ) :
     RecyclerView.Adapter<APIModelAdapterAgency.ViewHolder>() {
-
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
         LayoutInflater.from(parent.context).inflate(
             R.layout.card_dialog_list_search,
@@ -28,7 +25,7 @@ class APIModelAdapterAgency(
         val resultAgency = resultsAgency?.get(position)
         resultAgency.let {
             var phoneNumber = resultAgency!!.phonenumber
-            if (resultAgency!!.phonenumber!!.isEmpty()){
+            if (resultAgency!!.phonenumber!!.isEmpty()) {
                 phoneNumber = "-"
             }
             holder.view.findViewById<TextView>(R.id.displayFname).text = resultAgency!!.displayName

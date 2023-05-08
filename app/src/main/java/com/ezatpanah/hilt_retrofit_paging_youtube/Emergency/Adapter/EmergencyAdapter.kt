@@ -122,15 +122,6 @@ class EmergencyAdapter @Inject() constructor(
                 serviceName = serviceList.data[i].name
             }
         }
-//        val typeMaxService = serviceList.data.size
-//        for (i in 0 until typeMaxService) {
-//            val serviceIdList = serviceList.data[i].id
-//            if (serviceId == serviceIdList) {
-//                serviceName = serviceList.data[i].name.toString()
-//
-//            }
-//        }
-        Log.i("service name", "getName: $serviceName")
         return Triple(text,color,serviceName)
     }
 

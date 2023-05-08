@@ -1,7 +1,6 @@
 package com.ezatpanah.hilt_retrofit_paging_youtube.RetrofitApi
 
 import com.ezatpanah.hilt_retrofit_paging_youtube.BuildConfig
-import com.ezatpanah.hilt_retrofit_paging_youtube.utils.API_KEY
 import com.ezatpanah.hilt_retrofit_paging_youtube.utils.BASE_URL
 import com.ezatpanah.hilt_retrofit_paging_youtube.utils.NETWORK_TIMEOUT
 import com.google.gson.Gson
