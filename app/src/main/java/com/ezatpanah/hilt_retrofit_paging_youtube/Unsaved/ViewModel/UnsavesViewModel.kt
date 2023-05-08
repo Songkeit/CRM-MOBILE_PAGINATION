@@ -1,4 +1,4 @@
-package com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.MovieViewModel
+package com.ezatpanah.hilt_retrofit_paging_youtube.Unsaved.ViewModel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -7,13 +7,13 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
-import com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.Paging.EmergencyPagingSource
-import com.ezatpanah.hilt_retrofit_paging_youtube.RetrofitApi.ApiRepository
 import com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.Model.ApiInformationUser
 import com.ezatpanah.hilt_retrofit_paging_youtube.Home.Model.KioskList
 import com.ezatpanah.hilt_retrofit_paging_youtube.Home.Model.ServiceList
 import com.ezatpanah.hilt_retrofit_paging_youtube.Home.Model.TypeStoryModel
 import com.ezatpanah.hilt_retrofit_paging_youtube.Normal.Model.DeleteData
+import com.ezatpanah.hilt_retrofit_paging_youtube.RetrofitApi.ApiRepository
+import com.ezatpanah.hilt_retrofit_paging_youtube.Unsaved.Paging.UnsavedPagingSource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,13 +21,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class EmergencyViewModel @Inject constructor(private val repository: ApiRepository) : ViewModel() {
+class UnsavesViewModel @Inject constructor(private val repository: ApiRepository) : ViewModel() {
 
     val loading = MutableLiveData<Boolean>()
-    var search:String? = null
 
-    val emergencyList = Pager(PagingConfig(1)) {
-        EmergencyPagingSource(repository,search) // search
+    val unsavedList = Pager(PagingConfig(1)) {
+        UnsavedPagingSource(repository) // search
     }.flow.cachedIn(viewModelScope)
 
 
@@ -64,7 +63,9 @@ class EmergencyViewModel @Inject constructor(private val repository: ApiReposito
 
 
     }
-    private val _statetypeStory = MutableStateFlow<StateControllerTypeStory>(StateControllerTypeStory.Empty)
+    private val _statetypeStory = MutableStateFlow<StateControllerTypeStory>(
+        StateControllerTypeStory.Empty
+    )
     val statetypeStory: StateFlow<StateControllerTypeStory> = _statetypeStory
     sealed class StateControllerTypeStory{
         object Loading : StateControllerTypeStory()
@@ -73,7 +74,9 @@ class EmergencyViewModel @Inject constructor(private val repository: ApiReposito
         data class Success(val dataList: TypeStoryModel?) : StateControllerTypeStory()
         data class Data(val data: DeleteData?) : StateControllerTypeStory()
     }
-    private val _stateservicelist = MutableStateFlow<StateControllerServiceList>(StateControllerServiceList.Empty)
+    private val _stateservicelist = MutableStateFlow<StateControllerServiceList>(
+        StateControllerServiceList.Empty
+    )
     val stateservicelist: StateFlow<StateControllerServiceList> = _stateservicelist
     sealed class StateControllerServiceList {
         object Loading : StateControllerServiceList()
@@ -145,7 +148,7 @@ class EmergencyViewModel @Inject constructor(private val repository: ApiReposito
             _stateintent.value = StateControllerIntent.Success(id)
             Log.i("check intent", "getDataCheckIntent: success")
         }else{
-            _stateintent.value = StateControllerIntent.Error("ไม่สามารถดูข้อมูลได้")
+            _stateintent.value = StateControllerIntent.Error("Error")
             Log.i("check intent", "getDataCheckIntent: error")
 
         }
@@ -204,7 +207,7 @@ class EmergencyViewModel @Inject constructor(private val repository: ApiReposito
         }
         loading.postValue(true)
     }
-    fun updateData(updateUser:ApiInformationUser.Data) = viewModelScope.launch {
+    fun updateData(updateUser: ApiInformationUser.Data) = viewModelScope.launch {
         loading.postValue(true)
         val response = repository.updateData(updateUser)
         if (response.isSuccessful && response.body()!!.status != "FAIL"){

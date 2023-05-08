@@ -7,20 +7,20 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.ezatpanah.hilt_retrofit_paging_youtube.ui.HomeFragment"
+        android:name="com.ezatpanah.hilt_retrofit_paging_youtube.Home.UI.HomeFragment"
         android:label="บันทึกข้อมูล"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/unsavedFragment"
-        android:name="com.ezatpanah.hilt_retrofit_paging_youtube.ui.UnsavedFragment"
+        android:name="com.ezatpanah.hilt_retrofit_paging_youtube.Unsaved.UI.UnsavedFragment"
         android:label="บันทึกการรับเรื่อง"
         tools:layout="@layout/fragment_unsaved" >
     </fragment>
 
     <fragment
         android:id="@+id/normalFragment"
-        android:name="com.ezatpanah.hilt_retrofit_paging_youtube.ui.NormalFragment"
+        android:name="com.ezatpanah.hilt_retrofit_paging_youtube.Normal.UI.NormalFragment"
         android:label="ค้นหาข้อมูล"
         tools:layout="@layout/fragment_normal" >
         <action
@@ -32,7 +32,7 @@
 
     <fragment
         android:id="@+id/emergencyFragment"
-        android:name="com.ezatpanah.hilt_retrofit_paging_youtube.ui.EmergencyFragment"
+        android:name="com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.UI.EmergencyFragment"
         android:label="รับเรื่องฉุกเฉิน"
         tools:layout="@layout/fragment_emergency" >
 
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/emergencyDetailsFragment"
-        android:name="com.ezatpanah.hilt_retrofit_paging_youtube.ui.EmergencyDetailsFragment"
+        android:name="com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.UI.EmergencyDetailsFragment"
         android:label="บันทึกข้อมูล"
         tools:layout="@layout/fragment_emergency" >
         <argument
@@ -51,7 +51,7 @@
     </fragment>
     <fragment
         android:id="@+id/normalDetailFragment"
-        android:name="com.ezatpanah.hilt_retrofit_paging_youtube.ui.NormalDetailFragment"
+        android:name="com.ezatpanah.hilt_retrofit_paging_youtube.Normal.UI.NormalDetailFragment"
         android:label="บันทึกข้อมูล"
         tools:layout="@layout/fragment_normal_detail" >
         <argument

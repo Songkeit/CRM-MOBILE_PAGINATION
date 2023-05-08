@@ -12,10 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ezatpanah.hilt_retrofit_paging_youtube.Home.Model.ServiceList
 import com.ezatpanah.hilt_retrofit_paging_youtube.Home.Model.TypeStoryModel
 import com.ezatpanah.hilt_retrofit_paging_youtube.R
-import com.ezatpanah.hilt_retrofit_paging_youtube.databinding.ItemMoviesBinding
 import com.ezatpanah.hilt_retrofit_paging_youtube.databinding.ItemRecycleViewBinding
 import com.ezatpanah.hilt_retrofit_paging_youtube.response.RequestCommonApi
-import com.ezatpanah.hilt_retrofit_paging_youtube.ui.SharePreferenceManager
+import com.ezatpanah.hilt_retrofit_paging_youtube.Component.SharePreferenceManager
 import com.google.gson.Gson
 import javax.inject.Inject
 

@@ -2,7 +2,7 @@ package com.ezatpanah.hilt_retrofit_paging_youtube.RetrofitApi
 
 import com.ezatpanah.hilt_retrofit_paging_youtube.Home.Model.CreateUser
 import com.ezatpanah.hilt_retrofit_paging_youtube.Emergency.Model.ApiInformationUser
-import com.ezatpanah.hilt_retrofit_paging_youtube.ui.DeleteData
+import com.ezatpanah.hilt_retrofit_paging_youtube.Normal.Model.DeleteData
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_UnSave"
-        android:name="com.ezatpanah.hilt_retrofit_paging_youtube.ui.UnsavedFragment"
+        android:name="com.ezatpanah.hilt_retrofit_paging_youtube.Unsaved.UI.UnsavedFragment"
         android:label="UnSave">
         <action
             android:id="@+id/action_nav_UnSave_to_nav_home"
